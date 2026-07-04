@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>焦點新聞自動剪報：運作說明</title>
+<meta name="description" content="焦點新聞自動剪報系統的完整運作說明，寫給非技術同仁閱讀。">
+<style>
+  :root{
+    --paper:#f4f6f2; --card:#ffffff; --ink:#1a2620; --muted:#5f6f66;
+    --accent:#0c7a4d; --accent-soft:#e2efe7; --warn:#a8690f; --warn-soft:#f7ecd9;
+    --line:#d8ded9; --mono:"SF Mono","Cascadia Mono",Consolas,"Courier New",monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --paper:#111a15; --card:#18231d; --ink:#e4eae4; --muted:#93a29a;
+      --accent:#4cb888; --accent-soft:#1d3428; --warn:#dfa54a; --warn-soft:#33290f;
+      --line:#2b3830;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#111a15; --card:#18231d; --ink:#e4eae4; --muted:#93a29a;
+    --accent:#4cb888; --accent-soft:#1d3428; --warn:#dfa54a; --warn-soft:#33290f;
+    --line:#2b3830;
+  }
+  :root[data-theme="light"]{
+    --paper:#f4f6f2; --card:#ffffff; --ink:#1a2620; --muted:#5f6f66;
+    --accent:#0c7a4d; --accent-soft:#e2efe7; --warn:#a8690f; --warn-soft:#f7ecd9;
+    --line:#d8ded9;
+  }
+  html{background:var(--paper);}
+  body{
+    font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif;
+    color:var(--ink); line-height:1.75; margin:0; padding:0 20px 96px;
+  }
+  main{max-width:720px; margin:0 auto;}
+  header{padding:64px 0 28px; border-bottom:2px solid var(--ink); margin-bottom:8px;}
+  .kicker{font-size:.8rem; letter-spacing:.22em; color:var(--accent); font-weight:700; margin:0 0 14px;}
+  h1{font-size:2rem; line-height:1.3; margin:0 0 12px; font-weight:800; text-wrap:balance;}
+  .lede{font-size:1.05rem; color:var(--muted); margin:0; max-width:38em;}
+  h2{font-size:1.3rem; font-weight:800; margin:64px 0 6px; text-wrap:balance;}
+  h2 .no{color:var(--accent); font-family:var(--mono); font-size:.95rem; margin-right:10px;}
+  .sub{color:var(--muted); margin:0 0 20px; font-size:.95rem;}
+  p{margin:0 0 16px; max-width:40em;}
+  strong{font-weight:700;}
+  .cards{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:12px; margin:24px 0;}
+  .card{background:var(--card); border:1px solid var(--line); padding:16px 18px;}
+  .card h3{margin:0 0 6px; font-size:1rem;}
+  .card p{font-size:.9rem; color:var(--muted); margin:0;}
+  /* 時間軸 */
+  .tl{list-style:none; margin:28px 0; padding:0; border-left:2px solid var(--accent);}
+  .tl li{position:relative; padding:0 0 26px 26px;}
+  .tl li::before{content:""; position:absolute; left:-7px; top:.5em; width:12px; height:12px;
+    border-radius:50%; background:var(--paper); border:3px solid var(--accent);}
+  .tl li:last-child{padding-bottom:4px;}
+  .t{font-family:var(--mono); font-size:.82rem; color:var(--accent); font-weight:700;
+    letter-spacing:.04em; display:block; font-variant-numeric:tabular-nums;}
+  .tl h3{margin:2px 0 4px; font-size:1.02rem;}
+  .tl p{font-size:.93rem; color:var(--muted); margin:0; max-width:36em;}
+  .human .t{color:var(--warn);}
+  .human::before{border-color:var(--warn) !important;}
+  .tag{display:inline-block; font-size:.72rem; font-weight:700; letter-spacing:.08em;
+    padding:1px 8px; margin-left:8px; vertical-align:1px;
+    background:var(--warn-soft); color:var(--warn);}
+  .tag.auto{background:var(--accent-soft); color:var(--accent);}
+  /* 表格 */
+  .twrap{overflow-x:auto; margin:20px 0;}
+  table{border-collapse:collapse; width:100%; font-size:.92rem; background:var(--card);}
+  th{font-size:.78rem; letter-spacing:.1em; color:var(--muted); text-align:left; font-weight:700;}
+  th,td{border:1px solid var(--line); padding:9px 12px; vertical-align:top;}
+  td .m{font-family:var(--mono); font-size:.85rem; font-variant-numeric:tabular-nums;}
+  /* 三段 */
+  .sec3{display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:12px; margin:22px 0;}
+  .sec3 .card{border-top:3px solid var(--accent);}
+  .sec3 .n{font-family:var(--mono); color:var(--accent); font-size:.8rem; font-weight:700;}
+  blockquote{margin:22px 0; padding:14px 18px; background:var(--accent-soft);
+    border-left:4px solid var(--accent); font-size:.95rem;}
+  blockquote p{margin:0;}
+  .warnbox{margin:22px 0; padding:14px 18px; background:var(--warn-soft);
+    border-left:4px solid var(--warn); font-size:.95rem;}
+  .warnbox p{margin:0 0 8px;} .warnbox p:last-child{margin:0;}
+  dl{margin:20px 0; border-top:1px solid var(--line);}
+  dt{font-weight:700; padding-top:14px;}
+  dd{margin:2px 0 14px; color:var(--muted); font-size:.94rem; border-bottom:1px solid var(--line); padding-bottom:14px; max-width:40em;}
+  footer{margin-top:72px; padding-top:16px; border-top:1px solid var(--line);
+    font-size:.82rem; color:var(--muted);}
+  @media (prefers-reduced-motion: no-preference){
+    .tl li{transition:opacity .2s;}
+  }
+</style>
+</head>
+<body>
+<main>
+<header>
+  <p class="kicker">焦點新聞 · 自動剪報系統</p>
+  <h1>每天早上那份剪報，是怎麼生出來的</h1>
+  <p class="lede">給非技術同仁的完整說明：機器整夜收新聞、清晨照規則選稿、產出草稿——最後一步永遠是人看過才發。</p>
+</header>
+
+<p style="margin-top:28px">這套系統復刻的是「焦點新聞」每日剪報：把當天早上該看的財經新聞整理成三段（永豐相關、金融產業、總經），逐字套成固定格式，供值日同仁過目後貼進 LINE 群。目前是<strong>實驗期</strong>：外部廠商的正式版照常運作，系統產出的版本掛「華測」標記另行對照，定期檢討兩者差異。</p>
+
+<div class="cards">
+  <div class="card"><h3>機器不發稿</h3><p>系統只產「草稿」。發送到 LINE 永遠由人執行，管線沒有任何自動發送的路。</p></div>
+  <div class="card"><h3>整夜不漏接</h3><p>新聞網站的列表幾分鐘就換一輪。系統每小時收一次、累積存檔，早上才不會漏掉半夜發的稿。</p></div>
+  <div class="card"><h3>有參考答案</h3><p>外部廠商的正式剪報留檔當對照組，每月可算出系統「漏了幾則、多選幾則」。</p></div>
+</div>
+
+<h2><span class="no">01</span>一天的運作時間軸</h2>
+<p class="sub">綠點＝機器自動；橘點＝需要人。</p>
+<ul class="tl">
+  <li>
+    <span class="t">每小時 30 分（全天 24 次）<span class="tag auto">自動</span></span>
+    <h3>收新聞、存檔</h3>
+    <p>爬蟲把各家媒體最新稿件的「標題＋網址＋發稿時間」收進當日檔案，重複的自動跳過。一天約累積 800–1,500 則，全部帶著精確到分鐘的發稿時間。</p>
+  </li>
+  <li>
+    <span class="t">平日 07:00<span class="tag auto">自動</span></span>
+    <h3>先問：今天要出刊嗎？</h3>
+    <p>對照假日曆（週末、國定假日、颱風假以外的休市日）。休市就直接回報「今日不產稿」收工。</p>
+  </li>
+  <li>
+    <span class="t">07:00–07:05<span class="tag auto">自動</span></span>
+    <h3>從檔案裡取「今天早報該有的稿」</h3>
+    <p>金融與總經新聞只取<strong>當天 00:00–07:00 發布</strong>的（等於報紙早報的內容）；永豐相關新聞取<strong>近 24 小時</strong>（永豐的新聞多在白天盤中發布，收窄會漏）。</p>
+  </li>
+  <li>
+    <span class="t">07:05–07:12<span class="tag auto">自動（AI 判斷）</span></span>
+    <h3>照選文規則挑稿、分三段</h3>
+    <p>AI 逐則按一套白紙黑字的規則分類（見第 3 節），挑出約 18 則。挑完自動把 Google 轉址換回原始新聞網址，換不到的標「⚠️待補網址」。</p>
+  </li>
+  <li>
+    <span class="t">07:12–07:15<span class="tag auto">自動</span></span>
+    <h3>防重複、套格式、存檔</h3>
+    <p>跟過去 14 天「實際發過的剪報」比對，重複的剔除；再逐字套成固定版型，存一份到 Google Drive 的公關月報資料夾。</p>
+  </li>
+  <li class="human">
+    <span class="t">早上，值日同仁<span class="tag">人工</span></span>
+    <h3>過目、修改、手動貼 LINE</h3>
+    <p>系統把草稿全文連同「各段則數、被剔除清單、警語」一起送出。同仁看過、改過，才複製貼進群組。<strong>這一步不可省。</strong></p>
+  </li>
+  <li class="human">
+    <span class="t">（選用）確認後<span class="tag">人工</span></span>
+    <h3>發「華測」版到評測群</h3>
+    <p>實驗期若要把系統版發到評測小群做比較，由人執行推送指令：先預覽、確認才真的送出，標題自動加上「（華測）」跟正式版區隔。</p>
+  </li>
+</ul>
+
+<h2><span class="no">02</span>新聞從哪裡來</h2>
+<p class="sub">來源組合是照著正式剪報實際引用的媒體設計的（六月統計：工商 203 則、經濟 130 則、聯合 18 則、中時系 11 則、自由 6 則）。</p>
+<div class="twrap"><table>
+  <tr><th>管道</th><th>涵蓋</th><th>特性</th></tr>
+  <tr><td>新聞網 RSS <span class="m">×8</span></td><td>中央社財經、經濟日報（5 個頻道）、自由財經、ETtoday 財經</td><td>原站直連網址、發稿時間精確到分鐘</td></tr>
+  <tr><td>網站首頁</td><td>工商時報首頁、中時財經頁</td><td>工商官網擋機器人，只有首頁進得去；中時頁面帶完整時間</td></tr>
+  <tr><td>Google News 媒體查詢 <span class="m">×5</span></td><td>工商時報、經濟日報、中時、聯合報、自由時報</td><td>等於各報的「準全站清單」，一次 100 則、含清晨紙本批次；缺點是網址是轉址，選中後要換回原文</td></tr>
+  <tr><td>Google News 關鍵字 <span class="m">×17</span></td><td>永豐相關 7 組實體詞＋金融/總經主題詞（金管會、壽險、央行、房市、關稅…）</td><td>接住不在上述媒體清單裡的長尾報導</td></tr>
+</table></div>
+<blockquote><p><strong>為什麼要每小時收？</strong>新聞網站的「最新列表」只放最近 20 則，尖峰時段不到 10 分鐘就換完一輪。早上才去看，半夜發的稿早被擠掉了。每小時收一次、存起來，等於幫早報留了完整底稿。</p></blockquote>
+
+<h2><span class="no">03</span>新聞是怎麼被選中的</h2>
+<p class="sub">選文不是黑箱：每一則都走同一套四個問題，答案決定去留。這套規則來自對 118 天正式剪報（2,104 則）的逐條歸納。</p>
+<div class="sec3">
+  <div class="card"><span class="n">第一段</span><h3>永豐相關新聞</h3><p>永豐體系（金控、銀行、證券、投信、併購中的京城銀…）是新聞主角才算。負面消息<strong>必收、放最前面</strong>；自家官網的行銷文不算新聞，外部媒體報導的才收。目標 0–5 則，沒有就整段留白。</p></div>
+  <div class="card"><span class="n">第二段</span><h3>金融產業新聞</h3><p>台灣金融業的產業面：金管會與央行的政策、同業動態、保險證券商品、裁罰與風險事件。個股漲跌不算。目標 5–8 則。</p></div>
+  <div class="card"><span class="n">第三段</span><h3>總經相關新聞</h3><p>影響資金與市場的環境：台灣的物價房市台股、國際的 Fed、匯率、油價、關稅。判準只有一條——錢往哪流、風險從哪來。目標 8–12 則。</p></div>
+</div>
+<p>幾條重要的潛規則：兩大報同一天報同一件事＝重要訊號，必收；標題帶「新高、首度、破兆」優先；體育娛樂社會新聞一律排除（除非涉及永豐）；<strong>寧缺勿濫</strong>——湊不滿目標數就少放，不硬塞。</p>
+
+<h2><span class="no">04</span>怎麼保證不跟前幾天重複</h2>
+<p>每天產稿前，系統會把<strong>過去 14 天實際發出去的剪報</strong>攤開來比對，同一則新聞（網址相同或標題相同）出現過就剔除。比對基準以<strong>外部廠商的正式版為準</strong>——因為那才是群組裡真正發過的內容；系統自己的歷史草稿只用來補正式版還沒歸檔的日子。</p>
+
+<h2><span class="no">05</span>實驗期的成績單怎麼算</h2>
+<p>資料庫裡存了兩套剪報，檔名日期一一對應：</p>
+<div class="twrap"><table>
+  <tr><th>資料夾</th><th>內容</th><th>角色</th></tr>
+  <tr><td><span class="m">official/</span></td><td>外部廠商產製、實際發到群組的正式剪報（已收錄六月全月 21 個發送日）</td><td>參考答案</td></tr>
+  <tr><td><span class="m">drafts/</span></td><td>本系統每天產出的草稿</td><td>受測答案</td></tr>
+</table></div>
+<p>對照工具逐日比對兩邊，算出兩個數字：<strong>召回率</strong>（正式版收的稿，系統抓到幾成）和<strong>精確率</strong>（系統選的稿，有幾成正式版也認同）。每月檢討一次，漏選多選的類型如果有規律，就修選文規則——<strong>規則修改一律先給人看過才生效</strong>。</p>
+
+<h2><span class="no">06</span>LINE 發送與「華測」標記</h2>
+<p>發送用的是 LINE 官方帳號「永豐金控新聞小助手」。執行推送時：</p>
+<p>① 先跑一次<strong>預覽</strong>——畫面印出完整內容，標題自動變成「〔日期 焦點新聞<strong>（華測）</strong>〕」，此時什麼都還沒送出；② 確認沒問題，加上確認參數再跑一次，才真正發進群組。</p>
+<div class="warnbox">
+  <p><strong>額度要留意：</strong>免費方案每月 200 則，而且發到群組是<strong>按群內人數計算</strong>——發 1 則到 20 人的群＝用掉 20 則。所以實驗期發小型評測群（3–5 人）剛剛好，直接發正式大群會馬上超額。</p>
+  <p><strong>憑證是測試用的：</strong>金鑰目前放在系統裡方便測試，實驗結束要到 LINE 後台停用重簽，不能只刪檔案。</p>
+</div>
+
+<h2><span class="no">07</span>出了狀況會怎樣</h2>
+<p class="sub">原則：寧可交出「帶警語的部分草稿」，也不無聲失敗。看到警語時對照這張表。</p>
+<div class="twrap"><table>
+  <tr><th>草稿上的警語</th><th>意思</th><th>需要做什麼</th></tr>
+  <tr><td>⚠️ 今日休市不產稿</td><td>假日曆判定今天不出刊</td><td>不用做事，這不是故障</td></tr>
+  <tr><td>⚠️ cache 缺失，使用即時抓稿退路</td><td>整夜收稿的排程沒跑，臨時改用當下抓到什麼算什麼（可能漏半夜的稿）</td><td>草稿照常可用，但請回報，讓技術端檢查排程</td></tr>
+  <tr><td>⚠️待補網址</td><td>這一則換不回原始網址，目前掛的是 Google 轉址（點了仍會跳到原文）</td><td>過目時可手動搜標題補上原文網址，或照樣發</td></tr>
+  <tr><td>⚠️ 假日曆已過期</td><td>次年的休市日還沒更新進系統（每年 12 月要更新一次）</td><td>提醒維護者更新假日曆</td></tr>
+  <tr><td>某段偏少／為空</td><td>當天新聞真的少，或被去重剔除較多</td><td>留白是允許的；覺得異常可回報</td></tr>
+</table></div>
+
+<h2><span class="no">08</span>小辭典</h2>
+<dl>
+  <dt>草稿（華測版）</dt><dd>本系統產出、標題帶「（華測）」標記的剪報，用來跟正式版對照，不取代正式版。</dd>
+  <dt>正式版</dt><dd>外部廠商目前每天實際發到群組的剪報，實驗期的參考答案。</dd>
+  <dt>候選稿池</dt><dd>爬蟲整夜累積的新聞底稿，每天數百到上千則，選文就是從這裡挑。</dd>
+  <dt>時間窗口</dt><dd>「只取某個時段發布的新聞」。金融/總經取當天 00:00–07:00（貼齊報紙早報），永豐取近 24 小時。</dd>
+  <dt>Google 轉址</dt><dd>從 Google News 收到的新聞連結是 Google 的中繼網址，點了會跳到原文；系統會盡量換回原始網址，換不到就標待補。</dd>
+  <dt>召回率／精確率</dt><dd>召回率＝正式版收的稿我們抓到幾成（愈高愈不漏）；精確率＝我們選的稿有幾成是對的（愈高愈不濫）。</dd>
+</dl>
+
+<footer>本頁對應系統的實際運作方式；細部規則以 repo 內的 CLAUDE.md 與 reference/selection_rules.md 為準。內容更新：2026 年 7 月。</footer>
+</main>
+</body>
+</html>
