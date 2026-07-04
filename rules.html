@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>選文規則詳解｜焦點新聞</title>
+<meta name="description" content="焦點新聞剪報的選文與分類規則：四問分流、三段判準、跨段裁決、排除清單與驗證範例。">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<nav class="nav"><ul>
+  <li><a href="index.html">總覽</a></li>
+  <li><a href="rules.html" aria-current="page">選文規則詳解</a></li>
+  <li><a href="pipeline.html">系統設計說明</a></li>
+</ul></nav>
+<main>
+<header>
+  <p class="kicker">焦點新聞 · 選文與分類</p>
+  <h1>每天上百則新聞，怎麼決定哪些收、放哪一段</h1>
+  <p class="lede">這頁把整套判斷規則攤開講清楚。每一則候選都走同一套流程，答案決定去留與分段——關鍵字會隨時期換，底層的判斷視角不變。</p>
+</header>
+
+<p style="margin-top:28px">整套規則是依長期剪報樣本逐條歸納出來的。做法是：先問四個問題決定去留與分段（<a href="#flow">§2</a>），跨段模糊的再查裁決表（<a href="#judge">§6</a>），最後用重要度訊號排序（<a href="#signal">§8</a>）。</p>
+
+<h2 id="view"><span class="no">01</span>三段對應三個問題</h2>
+<p>為什麼是這三段？因為讀者每天早上要回答三件事：</p>
+<div class="sec3">
+  <div class="card"><span class="n">永豐相關</span><h3>外界今天怎麼說我們？</h3><p>自家的聲譽與曝險——有沒有需要處理的負面消息。</p></div>
+  <div class="card"><span class="n">金融產業</span><h3>同業與法規有什麼變化？</h3><p>競爭者做了什麼、主管機關要求什麼、商品市場變了什麼。</p></div>
+  <div class="card"><span class="n">總經相關</span><h3>資金與風險往哪走？</h3><p>錢往哪裡流、風險從哪裡來的整體環境。</p></div>
+</div>
+<p>另外有四條貫穿全部的「引力法則」——實際上最容易入選的稿都符合其中之一：</p>
+<ul class="plain">
+  <li><strong>監理優先：</strong>金管會、央行、財政部一有動作，幾乎必收。</li>
+  <li><strong>紀錄敏感：</strong>標題含「新高／新低／連 N 紅／首度／破 X 兆」是最強的單一入選訊號。</li>
+  <li><strong>議題全程追蹤：</strong>一項政策從醞釀 → 草案 → 定案 → 上路，全程跟到落地。</li>
+  <li><strong>危機連續劇：</strong>系統性風險事件每天跟進，直到收斂。</li>
+</ul>
+<div class="twrap"><table>
+  <tr><th>段別</th><th>目標則數</th><th>上限</th></tr>
+  <tr><td>永豐相關</td><td>0–5（可為 0，無稿整段留白）</td><td class="m">8</td></tr>
+  <tr><td>金融產業</td><td class="m">5–8</td><td class="m">13</td></tr>
+  <tr><td>總經相關</td><td class="m">8–12</td><td class="m">16</td></tr>
+</table></div>
+<p>全篇日均約 18 則，<strong>寧缺勿濫</strong>。唯一例外：永豐的負面事件必收、置頂，不受目標數限制。</p>
+
+<h2 id="flow"><span class="no">02</span>四問分流：逐則依序問，命中即停</h2>
+<ol class="flow">
+  <li><b>涉及永豐體系嗎？</b>　<span class="go">是 → 永豐段</span>（正負面都收；負面必收、置頂）</li>
+  <li><b>命中排除清單嗎？</b>（見 <a href="#exclude">§7</a>）　<span class="go">是 → 丟棄</span></li>
+  <li><b>主角是金融機構／監理機關／金融商品嗎？</b>　<span class="go">是 → 金融產業段</span></li>
+  <li><b>影響資金與市場的總經或國際事件嗎？</b>　<span class="go">是 → 總經段</span></li>
+  <li class="drop"><b>以上都不是</b>　→ 丟棄（寧缺勿濫）</li>
+</ol>
+<blockquote><p>注意順序：<strong>第 1 問排在第 2 問之前</strong>。所以涉及永豐的社會案件照收（一般社會案件本來屬於排除類）——永豐永遠優先判斷。</p></blockquote>
+
+<h2 id="sp"><span class="no">03</span>什麼算「永豐是主角」</h2>
+<p>關鍵是永豐為新聞的<strong>主角</strong>，不是被順帶提到、被引用一句話、或只是名單裡的一員。以下都算：</p>
+<ul class="plain">
+  <li><strong>法人：</strong>永豐金控／銀行／證券／投信／租賃，以及併購對象京城銀。</li>
+  <li><strong>人：</strong>高層或首席具名發言——即使談的是總經，也歸永豐段。</li>
+  <li><strong>商品：</strong>自家 ETF、信用卡、數位帳戶等。</li>
+  <li><strong>贊助資產：</strong>永豐雲豹（籃球）、冠名活動——<strong>只收里程碑</strong>（封王、晉級、奪冠），例行賽果不收。</li>
+  <li><strong>負面事件：</strong>詐貸、違約、裁罰、客訴——必收、置頂，不受目標數限制。</li>
+</ul>
+<p><strong>執行細節——看網址不看主題：</strong>跳過的是永豐自家平台的行銷／教學頁；但同一件事若有外部媒體報導版，就收外部版（不要一看到自家品牌名就整題斃掉）。同一則新聞稿多家轉載，只留 1–2 家（優先主流媒體）。</p>
+
+<h2 id="fin"><span class="no">04</span>金融產業：行為者 × 事件</h2>
+<p>每則落在唯一一格（誰 × 做了什麼）。</p>
+<div class="twrap"><table>
+  <tr><th>行為者（6 類）</th><th>事件（6 類）</th></tr>
+  <tr><td>銀行（國銀／公股／民營／純網銀／外銀）</td><td>績效財報（獲利、淨值）</td></tr>
+  <tr><td>保險（壽險／產險／再保，語料最大宗）</td><td>業務量能（放款、保費、刷卡、AUM）</td></tr>
+  <tr><td>證券／期貨／投信／ETF 發行</td><td>商品與定價（新商品、宣告利率、聯貸案）</td></tr>
+  <tr><td>金控（財報／配息／治理／整併）</td><td>監理法制（法規、鬆綁、開放、試辦）</td></tr>
+  <tr><td>監理與政策機關（金管會／央行／財政部／公會）</td><td>風險與裁罰（裁罰、弊案、曝險、逾放）</td></tr>
+  <tr><td>新金融（虛擬資產／穩定幣／電支／第三方支付）</td><td>策略布局（併購、海外、異業合作、AI、人事）</td></tr>
+</table></div>
+<p><strong>最優先收的：</strong>監理機關的政策（法規、開放、裁罰）與各行為者的風險裁罰事件為必收層；保險業整體權重最高；金控獲利月報潮集中在每月 10–17 日，收彙總則優於單一則。</p>
+
+<h2 id="mac"><span class="no">05</span>總經：地理 × 主題</h2>
+<div class="twrap"><table>
+  <tr><th>台灣（5）</th><th>國際（5）</th></tr>
+  <tr><td>實體經濟：GDP、出口、PMI、景氣、就業薪資</td><td>美國：Fed、通膨就業數據、白宮財經（關稅）</td></tr>
+  <tr><td>物價與利率環境：CPI、輸入性通膨、油電價</td><td>中國兩岸：經濟數據、人民幣、地緣（總經面）</td></tr>
+  <tr><td>房市行情：價量、推案、建商、都更、社宅</td><td>日歐與其他：日銀日圓、ECB、韓國、新興市場</td></tr>
+  <tr><td>台股與資金：大盤、外資、成交量、國安基金</td><td>地緣與大宗：戰爭、油價、黃金、航運、能源</td></tr>
+  <tr><td>財經政策：總預算、稅制、產業戰略、經貿談判</td><td>全球機構與跨市場：IMF、美債、美元、比特幣</td></tr>
+</table></div>
+<blockquote><p>判準只有一條：<strong>是否影響資金與市場</strong>。與台灣金融業沒有直接關聯的重要國際財經，在這段就是要收——這跟第一段「同業情蒐」的邏輯不一樣。</p></blockquote>
+
+<h2 id="judge"><span class="no">06</span>跨段裁決：同一件事，角度不同會分到不同段</h2>
+<p>十個常年跨界的主題，以「角度」定段。同一事件因角度不同而分到不同段，這不是錯誤，是規則。</p>
+<div class="twrap"><table>
+  <tr><th>主題</th><th>機構／承作角度 → 金融產業</th><th>市場／行情角度 → 總經</th></tr>
+  <tr><td>房市</td><td>房貸利率／成數、央行信用管制決策本身</td><td>價量、推案、建商；管制對房市的影響評估</td></tr>
+  <tr><td>利率</td><td>台灣央行決策＋對金融業的傳導</td><td>Fed／ECB／日銀；業者評論總經</td></tr>
+  <tr><td>匯率</td><td>金融業匯率風險（壽險避險）</td><td>台幣／日圓／美元行情</td></tr>
+  <tr><td>台股</td><td>金融股、券商經營、壽險買賣台股</td><td>大盤／量／外資／制度</td></tr>
+  <tr><td>金管會</td><td>對機構或商品的監理（裁罰、開放）</td><td>對整體市場（護盤、交易制度）</td></tr>
+  <tr><td>虛擬資產</td><td>法規、業者取照、銀行託管</td><td>幣價行情</td></tr>
+  <tr><td>聯貸</td><td>一律金融產業（主辦行視角）</td><td>—</td></tr>
+</table></div>
+<p>表外的案例回到三條原則：</p>
+<ul class="plain">
+  <li><strong>主題優先於發言者</strong>——唯一例外是發言者屬永豐（覆寫到永豐段）。</li>
+  <li><strong>機構／商品 vs 市場</strong>——監理動作對「機構或商品」歸金融產業；對「整體市場」歸總經。</li>
+  <li><strong>承作端 vs 行情端</strong>——金融機構做的事歸金融產業；價格與供需的結果歸總經。</li>
+</ul>
+
+<h2 id="exclude"><span class="no">07</span>一定排除的</h2>
+<div class="cards">
+  <div class="card"><h3>基本五類</h3><p>體育娛樂追星／社會案件犯罪意外／與金融無關的個股／生活健康旅遊／純政治口水。</p></div>
+  <div class="card"><h3>補充四類</h3><p>廣編業配（無事件、通篇形容詞）／選股清單（「14 檔外資連買」）／贊助隊伍例行賽果／與永豐無關的獎項活動。</p></div>
+  <div class="card"><h3>反向豁免（避免誤殺）</h3><p>個別企業的聯貸／違約算金融產業（銀行視角）；涉財經政策的政治新聞算總經；涉永豐的社會案件歸永豐段。</p></div>
+</div>
+
+<h2 id="signal"><span class="no">08</span>重要度訊號</h2>
+<ul class="plain">
+  <li><strong>兩大報同一天報同一件事＝最強訊號，必收並置頂。</strong>選文開始前會先掃一遍候選池找這種同題。</li>
+  <li><strong>標題數字化：</strong>含具體數字／紀錄詞的優先，純形容詞的降級。</li>
+  <li><strong>週期議題日曆：</strong>可預期的議題有時間表——月初 PMI、月中 CPI 與金控月報潮、季底央行理監事會等——選文時主動核對有沒有漏抓。</li>
+</ul>
+
+<h2 id="test"><span class="no">09</span>規則怎麼實際套用（驗證範例）</h2>
+<p class="sub">用真實案例檢驗分類器的自我校準；開始選文前先跑一遍。</p>
+<div class="twrap"><table>
+  <tr><th>標題</th><th>正解</th><th>為什麼</th></tr>
+  <tr><td>楊金龍微調房市管制</td><td class="pick">金融產業</td><td>管制決策本身＝貸款端</td></tr>
+  <tr><td>央行信用管制微鬆綁 台經院估房市低檔盤整</td><td class="pick">總經</td><td>講的是對房市行情的影響</td></tr>
+  <tr><td>央行上修全年經濟成長率至 7.28%</td><td class="pick">總經</td><td>總經預測</td></tr>
+  <tr><td>公股銀：Fed 今年降息將受限</td><td class="pick">總經</td><td>主題優先於發言者</td></tr>
+  <tr><td>（永豐首席）油價恐迫 Fed 重估降息</td><td class="pick">永豐段</td><td>發言者是永豐，覆寫主題</td></tr>
+  <tr><td>美超微聯貸台灣首案 中信銀主辦</td><td class="pick">金融產業</td><td>聯貸＝銀行視角，非個股</td></tr>
+  <tr><td>比特幣跌破 8 萬美元</td><td class="pick">總經</td><td>幣價行情</td></tr>
+  <tr><td>虛擬資產服務法三讀通過</td><td class="pick">金融產業</td><td>法制面</td></tr>
+  <tr><td>光電廠商涉詐貸 4,000 萬 永豐銀：求償</td><td class="pick">永豐段（置頂）</td><td>負面必收，永豐優先於排除</td></tr>
+  <tr><td>13 金控淨值飆 5.3 兆創高（內文點名永豐）</td><td class="pick">永豐段</td><td>彙總點名；若未點名則歸金融產業</td></tr>
+</table></div>
+
+<footer>回到<a href="index.html">總覽</a>，或看<a href="pipeline.html">系統設計說明</a>。內容更新：2026 年 7 月。</footer>
+</main>
+</body>
+</html>

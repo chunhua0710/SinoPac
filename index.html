@@ -5,91 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>焦點新聞自動剪報：運作說明</title>
 <meta name="description" content="焦點新聞自動剪報系統的完整運作說明，寫給非技術同仁閱讀。">
-<style>
-  :root{
-    --paper:#f4f6f2; --card:#ffffff; --ink:#1a2620; --muted:#5f6f66;
-    --accent:#0c7a4d; --accent-soft:#e2efe7; --warn:#a8690f; --warn-soft:#f7ecd9;
-    --line:#d8ded9; --mono:"SF Mono","Cascadia Mono",Consolas,"Courier New",monospace;
-  }
-  @media (prefers-color-scheme: dark){
-    :root{
-      --paper:#111a15; --card:#18231d; --ink:#e4eae4; --muted:#93a29a;
-      --accent:#4cb888; --accent-soft:#1d3428; --warn:#dfa54a; --warn-soft:#33290f;
-      --line:#2b3830;
-    }
-  }
-  :root[data-theme="dark"]{
-    --paper:#111a15; --card:#18231d; --ink:#e4eae4; --muted:#93a29a;
-    --accent:#4cb888; --accent-soft:#1d3428; --warn:#dfa54a; --warn-soft:#33290f;
-    --line:#2b3830;
-  }
-  :root[data-theme="light"]{
-    --paper:#f4f6f2; --card:#ffffff; --ink:#1a2620; --muted:#5f6f66;
-    --accent:#0c7a4d; --accent-soft:#e2efe7; --warn:#a8690f; --warn-soft:#f7ecd9;
-    --line:#d8ded9;
-  }
-  html{background:var(--paper);}
-  body{
-    font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif;
-    color:var(--ink); line-height:1.75; margin:0; padding:0 20px 96px;
-  }
-  main{max-width:720px; margin:0 auto;}
-  header{padding:64px 0 28px; border-bottom:2px solid var(--ink); margin-bottom:8px;}
-  .kicker{font-size:.8rem; letter-spacing:.22em; color:var(--accent); font-weight:700; margin:0 0 14px;}
-  h1{font-size:2rem; line-height:1.3; margin:0 0 12px; font-weight:800; text-wrap:balance;}
-  .lede{font-size:1.05rem; color:var(--muted); margin:0; max-width:38em;}
-  h2{font-size:1.3rem; font-weight:800; margin:64px 0 6px; text-wrap:balance;}
-  h2 .no{color:var(--accent); font-family:var(--mono); font-size:.95rem; margin-right:10px;}
-  .sub{color:var(--muted); margin:0 0 20px; font-size:.95rem;}
-  p{margin:0 0 16px; max-width:40em;}
-  strong{font-weight:700;}
-  .cards{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:12px; margin:24px 0;}
-  .card{background:var(--card); border:1px solid var(--line); padding:16px 18px;}
-  .card h3{margin:0 0 6px; font-size:1rem;}
-  .card p{font-size:.9rem; color:var(--muted); margin:0;}
-  /* 時間軸 */
-  .tl{list-style:none; margin:28px 0; padding:0; border-left:2px solid var(--accent);}
-  .tl li{position:relative; padding:0 0 26px 26px;}
-  .tl li::before{content:""; position:absolute; left:-7px; top:.5em; width:12px; height:12px;
-    border-radius:50%; background:var(--paper); border:3px solid var(--accent);}
-  .tl li:last-child{padding-bottom:4px;}
-  .t{font-family:var(--mono); font-size:.82rem; color:var(--accent); font-weight:700;
-    letter-spacing:.04em; display:block; font-variant-numeric:tabular-nums;}
-  .tl h3{margin:2px 0 4px; font-size:1.02rem;}
-  .tl p{font-size:.93rem; color:var(--muted); margin:0; max-width:36em;}
-  .human .t{color:var(--warn);}
-  .human::before{border-color:var(--warn) !important;}
-  .tag{display:inline-block; font-size:.72rem; font-weight:700; letter-spacing:.08em;
-    padding:1px 8px; margin-left:8px; vertical-align:1px;
-    background:var(--warn-soft); color:var(--warn);}
-  .tag.auto{background:var(--accent-soft); color:var(--accent);}
-  /* 表格 */
-  .twrap{overflow-x:auto; margin:20px 0;}
-  table{border-collapse:collapse; width:100%; font-size:.92rem; background:var(--card);}
-  th{font-size:.78rem; letter-spacing:.1em; color:var(--muted); text-align:left; font-weight:700;}
-  th,td{border:1px solid var(--line); padding:9px 12px; vertical-align:top;}
-  td .m{font-family:var(--mono); font-size:.85rem; font-variant-numeric:tabular-nums;}
-  /* 三段 */
-  .sec3{display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:12px; margin:22px 0;}
-  .sec3 .card{border-top:3px solid var(--accent);}
-  .sec3 .n{font-family:var(--mono); color:var(--accent); font-size:.8rem; font-weight:700;}
-  blockquote{margin:22px 0; padding:14px 18px; background:var(--accent-soft);
-    border-left:4px solid var(--accent); font-size:.95rem;}
-  blockquote p{margin:0;}
-  .warnbox{margin:22px 0; padding:14px 18px; background:var(--warn-soft);
-    border-left:4px solid var(--warn); font-size:.95rem;}
-  .warnbox p{margin:0 0 8px;} .warnbox p:last-child{margin:0;}
-  dl{margin:20px 0; border-top:1px solid var(--line);}
-  dt{font-weight:700; padding-top:14px;}
-  dd{margin:2px 0 14px; color:var(--muted); font-size:.94rem; border-bottom:1px solid var(--line); padding-bottom:14px; max-width:40em;}
-  footer{margin-top:72px; padding-top:16px; border-top:1px solid var(--line);
-    font-size:.82rem; color:var(--muted);}
-  @media (prefers-reduced-motion: no-preference){
-    .tl li{transition:opacity .2s;}
-  }
-</style>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
+<nav class="nav"><ul>
+  <li><a href="index.html" aria-current="page">總覽</a></li>
+  <li><a href="rules.html">選文規則詳解</a></li>
+  <li><a href="pipeline.html">系統設計說明</a></li>
+</ul></nav>
 <main>
 <header>
   <p class="kicker">焦點新聞 · 自動剪報系統</p>
@@ -126,7 +49,7 @@
   <li>
     <span class="t">07:05–07:12<span class="tag auto">自動（AI 判斷）</span></span>
     <h3>照選文規則挑稿、分三段</h3>
-    <p>AI 逐則按一套白紙黑字的規則分類（見第 3 節），挑出約 18 則。挑完自動把 Google 轉址換回原始新聞網址，換不到的標「⚠️待補網址」。</p>
+    <p>AI 逐則按一套白紙黑字的規則分類（詳見<a href="rules.html">選文規則詳解</a>），挑出約 18 則。挑完自動把 Google 轉址換回原始新聞網址，換不到的標「⚠️待補網址」。</p>
   </li>
   <li>
     <span class="t">07:12–07:15<span class="tag auto">自動</span></span>
@@ -157,7 +80,7 @@
 <blockquote><p><strong>為什麼要每小時收？</strong>新聞網站的「最新列表」只放最近 20 則，尖峰時段不到 10 分鐘就換完一輪。早上才去看，半夜發的稿早被擠掉了。每小時收一次、存起來，等於幫早報留了完整底稿。</p></blockquote>
 
 <h2><span class="no">03</span>新聞是怎麼被選中的</h2>
-<p class="sub">選文不是黑箱：每一則都走同一套四個問題，答案決定去留。這套規則來自對 118 天正式剪報（2,104 則）的逐條歸納。</p>
+<p class="sub">選文不是黑箱：每一則都走同一套四個問題，答案決定去留。完整規則見<a href="rules.html">選文規則詳解</a>。</p>
 <div class="sec3">
   <div class="card"><span class="n">第一段</span><h3>永豐相關新聞</h3><p>永豐體系（金控、銀行、證券、投信、併購中的京城銀…）是新聞主角才算。負面消息<strong>必收、放最前面</strong>；自家官網的行銷文不算新聞，外部媒體報導的才收。目標 0–5 則，沒有就整段留白。</p></div>
   <div class="card"><span class="n">第二段</span><h3>金融產業新聞</h3><p>台灣金融業的產業面：金管會與央行的政策、同業動態、保險證券商品、裁罰與風險事件。個股漲跌不算。目標 5–8 則。</p></div>
@@ -169,20 +92,12 @@
 <p>每天產稿前，系統會把<strong>過去 14 天實際發出去的剪報</strong>攤開來比對，同一則新聞（網址相同或標題相同）出現過就剔除。比對基準以<strong>外部廠商的正式版為準</strong>——因為那才是群組裡真正發過的內容；系統自己的歷史草稿只用來補正式版還沒歸檔的日子。</p>
 
 <h2><span class="no">05</span>實驗期的成績單怎麼算</h2>
-<p>資料庫裡存了兩套剪報，檔名日期一一對應：</p>
-<div class="twrap"><table>
-  <tr><th>資料夾</th><th>內容</th><th>角色</th></tr>
-  <tr><td><span class="m">official/</span></td><td>外部廠商產製、實際發到群組的正式剪報（已收錄六月全月 21 個發送日）</td><td>參考答案</td></tr>
-  <tr><td><span class="m">drafts/</span></td><td>本系統每天產出的草稿</td><td>受測答案</td></tr>
-</table></div>
-<p>對照工具逐日比對兩邊，算出兩個數字：<strong>召回率</strong>（正式版收的稿，系統抓到幾成）和<strong>精確率</strong>（系統選的稿，有幾成正式版也認同）。每月檢討一次，漏選多選的類型如果有規律，就修選文規則——<strong>規則修改一律先給人看過才生效</strong>。</p>
+<p>系統存了兩套剪報，檔名日期一一對應：外部廠商產製、實際發到群組的<strong>正式版</strong>當參考答案；本系統每天產出的<strong>草稿</strong>當受測答案。對照工具逐日比對兩邊，算出兩個數字：<strong>召回率</strong>（正式版收的稿，系統抓到幾成）和<strong>精確率</strong>（系統選的稿，有幾成正式版也認同）。每月檢討一次，漏選多選的類型如果有規律，就修選文規則——<strong>規則修改一律先給人看過才生效</strong>。設計原因詳見<a href="pipeline.html">系統設計說明</a>。</p>
 
 <h2><span class="no">06</span>LINE 發送與「華測」標記</h2>
-<p>發送用的是 LINE 官方帳號「永豐金控新聞小助手」。執行推送時：</p>
-<p>① 先跑一次<strong>預覽</strong>——畫面印出完整內容，標題自動變成「〔日期 焦點新聞<strong>（華測）</strong>〕」，此時什麼都還沒送出；② 確認沒問題，加上確認參數再跑一次，才真正發進群組。</p>
+<p>發送透過專用的 LINE 官方帳號。執行推送時：① 先跑一次<strong>預覽</strong>——畫面印出完整內容，標題自動變成「〔日期 焦點新聞<strong>（華測）</strong>〕」，此時什麼都還沒送出；② 確認沒問題，加上確認參數再跑一次，才真正發進群組。</p>
 <div class="warnbox">
   <p><strong>額度要留意：</strong>免費方案每月 200 則，而且發到群組是<strong>按群內人數計算</strong>——發 1 則到 20 人的群＝用掉 20 則。所以實驗期發小型評測群（3–5 人）剛剛好，直接發正式大群會馬上超額。</p>
-  <p><strong>憑證是測試用的：</strong>金鑰目前放在系統裡方便測試，實驗結束要到 LINE 後台停用重簽，不能只刪檔案。</p>
 </div>
 
 <h2><span class="no">07</span>出了狀況會怎樣</h2>
@@ -206,7 +121,7 @@
   <dt>召回率／精確率</dt><dd>召回率＝正式版收的稿我們抓到幾成（愈高愈不漏）；精確率＝我們選的稿有幾成是對的（愈高愈不濫）。</dd>
 </dl>
 
-<footer>本頁對應系統的實際運作方式；細部規則以 repo 內的 CLAUDE.md 與 reference/selection_rules.md 為準。內容更新：2026 年 7 月。</footer>
+<footer>想了解更細的判斷規則，見<a href="rules.html">選文規則詳解</a>；系統這樣設計背後的原因，見<a href="pipeline.html">系統設計說明</a>。內容更新：2026 年 7 月。</footer>
 </main>
 </body>
 </html>
