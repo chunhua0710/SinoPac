@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<!-- sinopac-deck template v3 · 2026-07 · logo 單源化＋頁尾注入 -->
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>簡報標題（永豐企業版範本）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@600;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* ═══ ENGINE — READ-ONLY：以下為版型引擎與品牌規格，組裝階段（S2）禁止修改。
+   自訂樣式一律寫入文末 <style id="deck-custom">。═══ */
+:root{--logo:url("data:image/png;base64,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")}
+.logo,.logo-top{display:inline-block;background:var(--logo) center/contain no-repeat;aspect-ratio:300/77}
+/* ============================================================
+   sinopac-deck 起手範本
+   引擎與品牌外框規格詳見 SKILL.md。重點鐵則：
+   - .frame 嚴禁加 max-width
+   - 框內字級一律 em、最小 .78em
+   - LOGO 只縮不放；深色面墊白底座
+   - 頁碼只放數字
+   ============================================================ */
+:root{
+  /* 官方色：紅 #D03238（行動/強調）、藍 #003F98（結構/輔助）。表面用淡化版，全彩只給細小元素 */
+  --brand:#d03238;--brand-deep:#a82329;--brand-soft:#e58b8f;--brand-bg:#fbe9ea;
+  --blue:#003f98;--blue-soft:#3a63ac;--blue-bg:#e8edf7;--blue-ink:#0a1830;
+  --canvas:#0b1322;
+  --paper:#edf0f4;--paper-2:#e3e8ef;--card:#ffffff;--card-2:#f8fafc;
+  --ink:#222631;--ink-soft:#49505d;--ink-mute:#808997;
+  --line:#dce1ea;--line-2:#cad1dd;
+  --ok:#2e7a57;--ok-bg:#e6f2ea;
+  --font-display:"Noto Sans TC",sans-serif;--font-body:"Noto Sans TC",sans-serif;--font-serif:"Noto Serif TC",serif;--font-mono:"JetBrains Mono",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-snap-type:y mandatory;scroll-behavior:smooth;height:100%}
+body{
+  font-family:var(--font-body);color:var(--ink);background:var(--canvas);height:100%;overflow-x:hidden;-webkit-font-smoothing:antialiased;
+  background-image:radial-gradient(circle at 10% -8%,rgba(208,50,56,.12),transparent 42%),radial-gradient(circle at 96% 110%,rgba(0,63,152,.25),transparent 46%);
+}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.3;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E")}
+
+/* ===== 固定 chrome ===== */
+.topbar{position:fixed;top:0;left:0;right:0;height:4px;z-index:60}
+.topbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--brand-deep),var(--brand));transition:width .25s ease}
+.dot-rail{position:fixed;right:18px;top:50%;transform:translateY(-50%);z-index:60;display:flex;flex-direction:column;gap:9px}
+.dot-rail button{position:relative;width:10px;height:10px;border-radius:50%;border:none;background:rgba(255,255,255,.22);cursor:pointer;padding:0;transition:all .2s}
+.dot-rail button:hover{background:var(--brand-soft);transform:scale(1.25)}
+.dot-rail button.on{background:var(--brand);transform:scale(1.35);box-shadow:0 0 0 4px rgba(208,50,56,.22)}
+.dot-rail button .lab{position:absolute;right:20px;top:50%;transform:translateY(-50%) translateX(6px);white-space:nowrap;font-size:.8rem;font-weight:600;color:var(--ink);background:#fff;padding:3px 9px;border-radius:7px;opacity:0;pointer-events:none;transition:all .18s}
+.dot-rail button:hover .lab{opacity:1;transform:translateY(-50%) translateX(0)}
+
+/* ===== 引擎：slide + 16:9 frame（嚴禁加 max-width）===== */
+.slide{min-height:100vh;scroll-snap-align:center;display:flex;align-items:center;justify-content:center;padding:16px 48px 16px 16px;position:relative;z-index:1}
+.frame{position:relative;aspect-ratio:16/9;width:min(100%,calc((100vh - 32px) * 16 / 9));container-type:size;background:var(--paper);border:1px solid rgba(255,255,255,.07);border-radius:16px;box-shadow:0 18px 50px rgba(0,0,0,.45);overflow:hidden;transition:transform .6s cubic-bezier(.2,.7,.2,1),opacity .6s;transform:scale(.965);opacity:.35}
+.frame::before{content:"";position:absolute;inset:0;background:linear-gradient(170deg,#fff 0%,var(--paper) 55%,var(--paper-2) 100%);pointer-events:none}
+.slide.active .frame{transform:scale(1);opacity:1}
+.inner{position:absolute;inset:0;padding:4cqh 5cqw 10.5cqh;display:flex;flex-direction:column;font-size:clamp(12px,2.6cqh,38px);overflow:clip}
+.inner.scroll{overflow-y:auto}
+.inner.scroll::-webkit-scrollbar{width:5px}.inner.scroll::-webkit-scrollbar-thumb{background:var(--line-2);border-radius:4px}
+
+/* ===== 線條母題 1：header 紅線（進場由左向右畫出）===== */
+.head{margin-bottom:1.1em}
+.kicker{font-family:var(--font-mono);font-size:.78em;letter-spacing:.16em;font-weight:600;color:var(--brand-deep);text-transform:uppercase;display:inline-flex;gap:.6em;align-items:center;margin-bottom:.35em}
+.kicker .pip{width:.5em;height:.5em;background:var(--brand);transform:rotate(45deg)}
+h2.title{font-family:var(--font-display);font-weight:900;font-size:2.3em;line-height:1.18;letter-spacing:-.01em;color:var(--ink)}
+.rule{position:relative;height:.5em;margin-top:.5em}
+.rule::before{content:"";position:absolute;left:0;right:0;top:.18em;height:.1em;background:linear-gradient(90deg,var(--brand) 16%,var(--brand-soft) 38%,rgba(229,139,143,0) 72%);transform:scaleX(0);transform-origin:left;transition:transform .9s cubic-bezier(.2,.7,.2,1) .3s}
+.rule::after{content:"";position:absolute;left:0;top:.04em;width:2.6em;height:.32em;background:var(--brand-deep);transform:scaleX(0);transform-origin:left;transition:transform .5s cubic-bezier(.2,.7,.2,1) .12s}
+.slide.active .rule::before,.slide.active .rule::after{transform:scaleX(1)}
+.lead{color:var(--ink-soft);font-size:1em;margin-top:.9em;max-width:44em;line-height:1.68}
+
+/* ===== 品牌頁尾：頁碼（純數字）＋標語＋LOGO 右下 ===== */
+.foot{position:absolute;left:5cqw;right:5cqw;bottom:2.6cqh;display:flex;align-items:center;gap:1.2em;border-top:1px solid rgba(208,50,56,.14);padding-top:1.1cqh}
+.foot .pg{font-family:var(--font-mono);font-size:.78em;color:var(--ink-mute);letter-spacing:.06em;border:1px solid var(--line-2);background:var(--card);padding:.12em .6em;border-radius:.35em}
+.foot .tag{font-size:.82em;color:var(--ink-soft);font-weight:500}
+.foot .tag .en{font-family:var(--font-serif);font-style:italic;color:var(--brand-deep);margin-left:.45em}
+.foot .logo{margin-left:auto;height:4.6cqh;width:auto}
+
+.reveal{opacity:0;transform:translateY(1.1em);transition:opacity .55s cubic-bezier(.2,.7,.2,1),transform .55s cubic-bezier(.2,.7,.2,1)}
+.slide.active .reveal{opacity:1;transform:none}
+.slide.active .inner > .reveal:nth-child(1){transition-delay:.05s}
+.slide.active .inner > .reveal:nth-child(2){transition-delay:.13s}
+.slide.active .inner > .reveal:nth-child(3){transition-delay:.21s}
+.slide.active .inner > .reveal:nth-child(4){transition-delay:.29s}
+
+/* ===== PATTERN: cover ===== */
+.cover .inner{padding:0;justify-content:center;align-items:center;text-align:center}
+.cover .logo-top{position:absolute;top:6.5cqh;left:5cqw;height:7.5cqh;width:auto}
+.cover .lines{position:absolute;top:8cqh;right:5cqw;display:flex;flex-direction:column;align-items:flex-end;gap:1.6cqh}
+.cover .lines i{display:block}
+.cover .lines i:nth-child(1){width:6cqw;height:.5cqh;background:var(--brand)}
+.cover .lines i:nth-child(2){width:15cqw;height:2px;background:linear-gradient(270deg,var(--blue-soft),rgba(58,99,172,0))}
+.cover .lines i:nth-child(3){width:22cqw;height:1px;background:linear-gradient(270deg,var(--line-2),rgba(202,209,221,0))}
+.cover .ct{font-family:var(--font-display);font-weight:900;font-size:3.5em;letter-spacing:.02em;color:var(--ink)}
+.cover .crule{width:60%;height:2px;background:linear-gradient(90deg,transparent,var(--brand) 18%,var(--brand) 82%,transparent);margin:1.1em 0 0;transform:scaleX(0);transition:transform 1s cubic-bezier(.2,.7,.2,1) .35s}
+.slide.active .crule{transform:scaleX(1)}
+.cover .who{font-family:var(--font-display);font-weight:700;font-size:1.45em;color:var(--ink);margin-top:2.2em}
+.cover .date{font-family:var(--font-mono);font-size:.95em;color:var(--ink-mute);margin-top:.9em;letter-spacing:.1em}
+.cover .foot{justify-content:center;border:none;padding:0}
+.cover .foot .tag{font-size:.92em}
+
+/* ===== PATTERN: agenda ===== */
+.agenda{display:grid;grid-template-columns:1fr 1fr;gap:.85em 1.6em;flex:1;align-content:center;min-height:0}
+.ag{display:flex;gap:1em;align-items:center;padding:.95em 1.1em;background:var(--card);border:1px solid var(--line);border-radius:.8em}
+.ag .no{font-family:var(--font-mono);font-weight:600;color:var(--brand-deep);font-size:1.1em;flex:none}
+.ag .t{font-weight:700;font-size:1.02em}
+.ag .s{font-size:.82em;color:var(--ink-mute);margin-top:.1em}
+
+/* ===== PATTERN: divider ===== */
+.divider .inner{justify-content:center}
+.divider .num{font-family:var(--font-mono);font-weight:600;font-size:7em;line-height:1;color:var(--brand-bg);-webkit-text-stroke:2px var(--brand-soft)}
+.divider .dt{font-family:var(--font-display);font-weight:900;font-size:2.6em;margin-top:.15em}
+.divider .rule{max-width:18em}
+.divider .dx{color:var(--ink-soft);font-size:1.05em;margin-top:1em;max-width:30em;line-height:1.7}
+
+/* ===== PATTERN: compare（藍＝現況、紅＝行動）===== */
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:1.1em;flex:1;min-height:0}
+.cpanel{border-radius:.9em;padding:1.35em 1.3em;display:flex;flex-direction:column;border:1px solid var(--line);background:var(--card)}
+.cpanel.a{background:var(--blue-bg);border-color:#d4ddee}
+.cpanel.b{background:linear-gradient(160deg,#fff,var(--brand-bg));border-color:#f0d2d4}
+.cpanel .ph{display:flex;align-items:center;gap:.6em;margin-bottom:.3em}
+.cpanel .t{font-family:var(--font-mono);font-size:.78em;font-weight:600;padding:.25em .7em;border-radius:.5em;letter-spacing:.05em;color:#fff}
+.cpanel.a .t{background:var(--blue)}
+.cpanel.b .t{background:var(--brand)}
+.cpanel .cl{font-family:var(--font-display);font-size:1.4em;font-weight:900}
+.cpanel.a .cl{color:var(--blue)}.cpanel.b .cl{color:var(--brand-deep)}
+.cpanel .nm{font-size:.82em;color:var(--ink-mute);margin:.1em 0 .85em}
+.clist{list-style:none;display:grid;gap:.58em;align-content:start}
+.clist li{display:flex;gap:.7em;align-items:flex-start;color:var(--ink-soft);font-size:.93em;line-height:1.55}
+.clist li .ic{flex:none;width:1.5em;height:1.5em;border-radius:.4em;display:grid;place-items:center;font-size:.78em;font-weight:700;margin-top:.12em;color:#fff}
+.cpanel.a .ic{background:var(--blue-soft)}
+.cpanel.b .ic{background:var(--brand)}
+.clist li b{color:var(--ink)}
+
+/* ===== PATTERN: cards ===== */
+.acts{display:grid;grid-template-columns:repeat(4,1fr);gap:1em;flex:1;min-height:0}
+.act{background:var(--card);border:1px solid var(--line);border-radius:.9em;padding:1.3em 1.2em;position:relative;overflow:hidden;display:flex;flex-direction:column}
+.act .stripe{position:absolute;left:0;top:0;bottom:0;width:.32em;background:var(--brand)}
+.act.blue .stripe{background:var(--blue)}
+.act .en{font-family:var(--font-mono);font-size:.78em;letter-spacing:.12em;color:var(--ink-mute);text-transform:uppercase}
+.act h3{font-family:var(--font-display);font-size:1.7em;font-weight:900;margin:.1em 0 .35em}
+.act .hint{font-size:.86em;color:var(--ink);font-weight:600}
+.act .detail{font-size:.84em;color:var(--ink-soft);line-height:1.6;margin-top:.6em;flex:1}
+.act .hot{margin-top:.7em;align-self:flex-start;font-size:.78em;font-weight:700;color:var(--brand-deep);background:var(--brand-bg);padding:.25em .7em;border-radius:.5em}
+.act.blue .hot{color:var(--blue);background:var(--blue-bg)}
+
+/* ===== PATTERN: kpi（進場數字滾動）===== */
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:1em;flex:1;align-content:center;min-height:0}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:.9em;padding:1.3em 1.2em;border-top:.3em solid var(--brand)}
+.kpi.blue{border-top-color:var(--blue)}
+.kpi .v{font-family:var(--font-mono);font-weight:600;font-size:2.5em;color:var(--ink);line-height:1.1}
+.kpi .v .u{font-size:.42em;color:var(--ink-mute);margin-left:.15em;font-weight:400}
+.kpi .l{font-weight:700;margin-top:.35em;font-size:.98em}
+.kpi .d{font-size:.82em;color:var(--ink-soft);margin-top:.3em;line-height:1.5}
+.kpi .tr{display:inline-block;font-size:.78em;font-weight:700;margin-top:.55em;padding:.15em .6em;border-radius:.4em}
+.kpi .tr.up{color:var(--ok);background:var(--ok-bg)}
+.kpi .tr.dn{color:var(--brand-deep);background:var(--brand-bg)}
+
+/* ===== PATTERN: table（藍表頭＋狀態 chip）===== */
+.tblwrap{flex:1;min-height:0;overflow:auto;border:1px solid var(--line);border-radius:.8em;background:var(--card)}
+table{width:100%;border-collapse:collapse;font-size:.92em}
+thead th{text-align:left;font-size:.84em;letter-spacing:.05em;color:#fff;background:var(--blue);padding:.7em 1em;font-weight:700;position:sticky;top:0}
+tbody td{padding:.62em 1em;border-top:1px solid var(--line);color:var(--ink-soft);line-height:1.5}
+tbody tr:first-child td{border-top:none}
+tbody tr:nth-child(even){background:var(--card-2)}
+td.em{color:var(--ink);font-weight:700}
+.st{display:inline-block;font-size:.78em;font-weight:700;padding:.15em .6em;border-radius:.4em;white-space:nowrap}
+.st.ok{color:var(--ok);background:var(--ok-bg)}
+.st.run{color:var(--blue);background:var(--blue-bg)}
+.st.warn{color:var(--brand-deep);background:var(--brand-bg)}
+
+/* ===== PATTERN: case ===== */
+.scn-grid{display:grid;grid-template-columns:.82fr 1.18fr;gap:1.2em;flex:1;min-height:0}
+.scn-col{display:flex;flex-direction:column;gap:.7em;min-height:0}
+.minlbl{font-size:.78em;font-weight:700;letter-spacing:.08em;color:var(--ink-mute);display:flex;align-items:center;gap:.5em}
+.minlbl::before{content:"";width:1em;height:.16em;background:var(--brand);border-radius:2px}
+.ba-old{background:var(--blue-bg);border-left:.18em solid var(--blue-soft);padding:.8em .95em;border-radius:0 .6em .6em 0;font-size:.86em;color:var(--ink-soft);line-height:1.55}
+.ba-new{background:var(--brand-bg);border-left:.18em solid var(--brand);padding:.8em .95em;border-radius:0 .6em .6em 0;font-size:.86em;color:var(--ink-soft);line-height:1.55}
+.cmd{position:relative;background:#161d2b;border-radius:.8em;padding:1em 1.1em}
+.cmd .cmd-top{display:flex;align-items:center;gap:.4em;margin-bottom:.7em}
+.cmd .cmd-top .d{width:.62em;height:.62em;border-radius:50%}
+.cmd .cmd-top .d:nth-child(1){background:#e0607a}.cmd .cmd-top .d:nth-child(2){background:#d6a23a}.cmd .cmd-top .d:nth-child(3){background:#3a9e6a}
+.cmd .cmd-top .label{margin-left:.4em;font-family:var(--font-mono);font-size:.78em;color:#8a93a3;letter-spacing:.1em}
+.cmd code{font-family:var(--font-mono);font-size:.84em;color:#e9ecf1;line-height:1.85;display:block;white-space:pre-wrap;word-break:break-word}
+.cmd code .q{color:var(--brand-soft)}.cmd code .f{color:#7fd0c2}
+.copy-btn{position:absolute;top:.7em;right:.7em;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:#cfd3dd;font-family:var(--font-body);font-size:.8em;font-weight:600;padding:.3em .8em;border-radius:.5em;cursor:pointer;transition:all .18s}
+.copy-btn:hover{background:rgba(255,255,255,.14);color:#fff}
+.copy-btn.done{background:var(--ok);border-color:var(--ok);color:#fff}
+.out{display:flex;align-items:center;gap:.6em;font-size:.86em;color:var(--blue);background:var(--blue-bg);padding:.75em .95em;border-radius:.6em;font-weight:600}
+.out .ar{color:var(--brand);font-weight:700;flex:none}
+.why{font-size:.84em;color:var(--ink-soft);background:var(--paper-2);border-radius:.6em;padding:.75em .95em;line-height:1.55}
+.why b{color:var(--ink)}
+
+/* ===== PATTERN: timeline ===== */
+.flow-row{display:grid;grid-template-columns:repeat(4,1fr);gap:.8em;flex:1;align-content:center;min-height:0}
+.fstep{background:var(--card);border:1px solid var(--line);border-radius:.8em;padding:1.1em 1em;position:relative;display:flex;flex-direction:column;gap:.4em}
+.fstep .ftag{font-family:var(--font-mono);font-size:.78em;color:var(--blue);background:var(--blue-bg);padding:.15em .55em;border-radius:.4em;align-self:flex-start;font-weight:600}
+.fstep.now .ftag{color:#fff;background:var(--brand)}
+.fstep .ft{font-family:var(--font-display);font-weight:900;font-size:1.08em;line-height:1.3}
+.fstep .fx{font-size:.82em;color:var(--ink-soft);line-height:1.55}
+.fstep .arr{position:absolute;right:-.66em;top:50%;transform:translateY(-50%);color:var(--brand-soft);font-weight:700;z-index:2}
+
+/* ===== PATTERN: optiontabs 方案切換（互動；金融/顧問風，取代終端機示意）===== */
+.tabs{display:flex;gap:.5em;flex-wrap:wrap;margin-bottom:.9em}
+.tabs button{font-family:var(--font-body);font-weight:700;font-size:.9em;border:1px solid var(--line-2);background:var(--card);color:var(--ink-soft);padding:.5em 1em;border-radius:.6em;cursor:pointer;transition:all .18s;display:flex;align-items:center;gap:.5em}
+.tabs button .tn{font-family:var(--font-mono);font-size:.78em;color:var(--ink-mute)}
+.tabs button:hover{border-color:var(--brand-soft)}
+.tabs button.on{background:var(--brand);border-color:var(--brand);color:#fff}
+.tabs button.on .tn{color:rgba(255,255,255,.82)}
+.tabpane{display:none}.tabpane.on{display:flex;flex-direction:column;flex:1;min-height:0;animation:fade .3s ease}
+@keyframes fade{from{opacity:0;transform:translateY(.4em)}to{opacity:1;transform:none}}
+.opt{display:grid;grid-template-columns:1.45fr 1fr;gap:1.1em;flex:1;min-height:0}
+.opt .omain{background:var(--card);border:1px solid var(--line);border-left:.28em solid var(--brand);border-radius:.8em;padding:1.2em 1.3em}
+.opt .omain .ot{font-family:var(--font-display);font-weight:900;font-size:1.45em;color:var(--ink);margin-bottom:.05em}
+.opt .omain .od{font-size:.84em;color:var(--ink-mute);margin-bottom:.7em}
+.opt .omain .ob{font-size:.95em;color:var(--ink-soft);line-height:1.66}
+.opt .ometa{display:flex;flex-direction:column;gap:.65em;min-height:0}
+.opt .mbox{background:var(--card-2);border:1px solid var(--line);border-radius:.7em;padding:.7em .9em}
+.opt .mbox .mh{font-size:.74em;font-weight:700;letter-spacing:.06em;color:var(--ink-mute);margin-bottom:.32em}
+.opt .mbox.pro .mh{color:var(--ok)}.opt .mbox.con .mh{color:var(--brand-deep)}
+.opt .mbox ul{list-style:none;display:grid;gap:.3em;font-size:.85em;color:var(--ink-soft)}
+.opt .mbox li{display:flex;gap:.5em;line-height:1.45}
+.opt .mbox li::before{content:"";flex:none;width:.42em;height:.42em;border-radius:50%;background:var(--line-2);margin-top:.5em}
+.opt .mbox.pro li::before{background:var(--ok)}.opt .mbox.con li::before{background:var(--brand-soft)}
+
+/* ===== PATTERN: matrix 2×2 定位矩陣（顧問常用：優先序/定位）===== */
+.mx{flex:1;min-height:0;display:grid;grid-template-columns:1.7em 1fr 1fr;grid-template-rows:1fr 1fr 1.7em;gap:.6em}
+.mx .yaxis{grid-column:1;grid-row:1/3;writing-mode:vertical-rl;text-align:center;font-weight:700;font-size:.8em;color:var(--ink-mute);align-self:center}
+.mx .xaxis{grid-column:2/4;grid-row:3;text-align:center;font-weight:700;font-size:.8em;color:var(--ink-mute);align-self:center}
+.mx .q{border-radius:.8em;padding:1em 1.15em;border:1px solid var(--line);display:flex;flex-direction:column;gap:.25em;min-height:0}
+.mx .q .qt{font-family:var(--font-display);font-weight:900;font-size:1.06em}
+.mx .q .qx{font-size:.83em;color:var(--ink-soft);line-height:1.5}
+.mx .q.hot{background:var(--brand-bg);border-color:#f0d2d4}.mx .q.hot .qt{color:var(--brand-deep)}
+.mx .q.cool{background:var(--blue-bg);border-color:#d4ddee}.mx .q.cool .qt{color:var(--blue)}
+.mx .q.soft{background:var(--card-2)}.mx .q.plain{background:var(--card)}
+
+/* ===== PATTERN: quote 觀點頁（顧問/編輯風大引述，節奏停頓用）===== */
+.quote-slide .inner{justify-content:center}
+.bigq{font-family:var(--font-serif);font-weight:700;font-size:2.05em;line-height:1.5;color:var(--ink);max-width:22em;position:relative}
+.bigq .k{color:var(--brand-deep)}
+.bigq::before{content:"\201C";position:absolute;left:-.5em;top:-.45em;font-size:2.6em;color:var(--brand-bg);font-family:var(--font-serif)}
+.qby{margin-top:1.1em;font-size:.95em;color:var(--ink-mute)}
+.qby b{color:var(--ink);font-weight:700}
+
+/* ===== PATTERN: closing（深藍反白）===== */
+.closing .frame{background:linear-gradient(165deg,#11264c 0%,var(--blue-ink) 70%)}
+.closing .frame::before{background:radial-gradient(circle at 80% 110%,rgba(0,63,152,.45),transparent 55%),radial-gradient(circle at 8% -10%,rgba(208,50,56,.22),transparent 45%)}
+.closing .inner{justify-content:center;align-items:center;text-align:center;padding:4cqh 8cqw 10.5cqh}
+.closing .logo-chip{background:#fff;border-radius:.7em;padding:.55em 1.1em;display:inline-flex;margin-bottom:1.7em}
+.closing .logo-chip .logo{height:4.2cqh;width:auto;display:block}
+.closing .cline{display:flex;align-items:center;gap:.5em;margin-bottom:1.5em}
+.closing .cline i{display:block;width:2.6em;height:.32em;background:var(--brand)}
+.closing .cline u{display:block;width:9em;height:2px;background:linear-gradient(90deg,rgba(229,139,143,.9),rgba(229,139,143,0))}
+.closing .quote{font-family:var(--font-display);font-weight:900;font-size:2.25em;line-height:1.5;max-width:20em;color:#f2f5fa}
+.closing .quote .hl{color:var(--brand-soft)}
+.closing .sub{color:#9fb3d4;margin-top:1.2em;font-size:1em}
+.closing .foot{border-top-color:rgba(255,255,255,.14);justify-content:center}
+.closing .tag{color:#c4d2e8}
+.closing .tag .en{color:var(--brand-soft)}
+
+/* ===== PATTERN: prose 文字密集（v3 新增）：結論先行 .bluf ＋ 雙欄 .prose ===== */
+.bluf{flex:0 0 auto;color:var(--ink);font-weight:500;font-size:1.02em;line-height:1.55;background:var(--blue-bg);border-left:3px solid var(--blue);padding:.6em .9em;border-radius:.4em;margin-bottom:.9em}
+.prose{flex:1;min-height:0;column-count:2;column-gap:2.6cqw;font-size:.86em;line-height:1.58;color:var(--ink-soft)}
+.prose p{break-inside:avoid;margin:0 0 .7em}
+.prose b{color:var(--blue);font-family:var(--font-display);font-weight:700}
+/* ===== PATTERN: blank 空白畫布（v3 新增）：只有品牌外框，內容自由 ===== */
+.canvas{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:flex-start}
+/* ===== 資訊層級與強調元件（融入各版型；層級規則見 SKILL.md 第一節、強調見第三節）===== */
+/* A 四級層級：區塊標題 .blk-h ＞ 關鍵字 .lv-k ＞ 內文(預設) ＞ 註解 .lv-n */
+.blk-h{display:flex;align-items:center;gap:.5em;font-family:var(--font-display);font-weight:900;font-size:1.12em;color:var(--ink);margin-bottom:.4em}
+.blk-h svg{width:1.25em;height:1.25em;color:var(--brand);flex:none}
+.lv-k{font-family:var(--font-display);font-weight:900;font-size:1.5em;line-height:1.3;color:var(--brand-deep);letter-spacing:-.01em;margin:.05em 0 .5em}
+.lv-b{font-size:.95em;color:var(--ink-soft);line-height:1.62}
+.lv-n{font-size:.8em;color:var(--ink-mute);margin-top:.6em;padding-top:.5em;border-top:1px dashed var(--line-2)}
+/* B inline 強調（皆在官方色內，無第三色）：關鍵字 .k／.kb、淡底 .mark、弱化 .mute */
+.k{color:var(--brand-deep);font-weight:700}
+.kb{color:var(--blue);font-weight:700}
+.mark{background:linear-gradient(transparent 55%,var(--brand-bg) 55%);padding:0 .1em;font-weight:700;color:var(--ink)}
+.mute{color:var(--ink-mute)}
+/* E icon 清單：圖示＋關鍵字前置＋灰色補述 */
+.ilist{list-style:none;display:grid;gap:.55em}
+.ilist li{display:flex;gap:.7em;align-items:flex-start;font-size:.93em;color:var(--ink-soft);line-height:1.5}
+.ilist .ic{flex:none;width:1.7em;height:1.7em;border-radius:.5em;background:var(--brand-bg);color:var(--brand-deep);display:grid;place-items:center;font-size:.85em;font-weight:700;margin-top:.05em}
+.ilist .ic.b{background:var(--blue-bg);color:var(--blue)}
+.ilist li .kw{font-weight:700;color:var(--ink)}
+.ilist li .rev{color:var(--ink-mute);font-size:.86em}
+/* C 主從版面 + D 焦點 hero（取代等分卡片；hero 大數字是刻意的視覺主角，屬官方色守則的例外） */
+.split{display:grid;grid-template-columns:1.5fr .9fr;gap:1.1em;flex:1;min-height:0}
+.hero{background:linear-gradient(160deg,#fff,var(--brand-bg));border:1px solid #f0d2d4;border-radius:.9em;padding:1.2em 1.3em;display:flex;flex-direction:column;justify-content:center}
+.hero .v{font-family:var(--font-mono);font-weight:600;font-size:3.4em;line-height:1;color:var(--brand-deep)}
+.hero .v .u{font-size:.32em;color:var(--ink-mute);margin-left:.2em;font-weight:500}
+.hero .l{font-weight:700;margin-top:.35em}
+.hero .cap{font-size:.86em;color:var(--ink-soft);margin-top:.5em;border-left:.18em solid var(--brand);padding-left:.7em;line-height:1.5}
+.side{display:flex;flex-direction:column;gap:.6em;justify-content:center}
+.side .s{background:var(--card-2);border:1px solid var(--line);border-radius:.7em;padding:.7em .9em}
+.side .s .n{font-family:var(--font-mono);font-weight:600;font-size:1.3em;color:var(--ink)}
+.side .s .n .up{font-size:.55em;color:var(--ok);font-weight:700;margin-left:.3em}
+.side .s .l{font-size:.8em;color:var(--ink-mute)}
+/* F 收合 <details>（完整但次要的資訊） */
+.acc{display:grid;gap:.5em}
+details{background:var(--card-2);border:1px solid var(--line);border-radius:.7em;overflow:hidden}
+details[open]{border-color:var(--blue-soft)}
+summary{cursor:pointer;list-style:none;padding:.6em .85em;font-weight:700;font-size:.95em;display:flex;align-items:center;gap:.5em;color:var(--ink)}
+summary::-webkit-details-marker{display:none}
+summary .dot{width:.5em;height:.5em;border-radius:50%;background:var(--blue);flex:none}
+summary .chev{margin-left:auto;color:var(--ink-mute);transition:transform .25s}
+details[open] summary .chev{transform:rotate(90deg);color:var(--blue)}
+details .body{padding:0 .85em .7em 2em;font-size:.9em;color:var(--ink-soft);line-height:1.6}
+/* F hover 白話 tooltip（列印時自動轉為括號內文，見 @media print） */
+.tip{border-bottom:1px dashed var(--blue-soft);color:var(--blue);font-weight:600;cursor:help;position:relative;outline:none}
+.tip::after{content:attr(data-tip);position:absolute;left:50%;bottom:135%;transform:translateX(-50%) translateY(.3em);background:var(--ink);color:#f2f4f8;font-size:.7em;font-weight:400;line-height:1.45;width:max-content;max-width:16em;padding:.6em .8em;border-radius:.5em;box-shadow:0 8px 22px rgba(0,0,0,.25);opacity:0;pointer-events:none;transition:all .18s;z-index:30}
+.tip:hover::after,.tip:focus::after{opacity:1;transform:translateX(-50%) translateY(0)}
+/* 列印鈕 */
+.print-btn{position:fixed;left:18px;bottom:16px;z-index:60;border:1px solid var(--line-2);background:rgba(255,255,255,.92);backdrop-filter:blur(6px);color:var(--ink-soft);font-family:var(--font-body);font-weight:600;font-size:.78rem;padding:7px 12px;border-radius:9px;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.18)}
+.print-btn:hover{color:var(--brand-deep);border-color:var(--brand-soft)}
+
+/* ===== 手機直立 fallback（必備，缺一就跑版；詳見 SKILL.md 第七節）===== */
+@media screen and (max-aspect-ratio: 13/10){
+  html{scroll-snap-type:none}
+  .slide{min-height:auto;padding:14px 12px;scroll-snap-align:none}
+  .frame{aspect-ratio:auto;width:96vw;transform:none;opacity:1;container-type:normal;border-radius:14px}
+  .inner{position:relative;inset:auto;height:auto;overflow:visible;font-size:16px;padding:26px 20px}
+  .reveal{opacity:1;transform:none}
+  .rule::before,.rule::after,.cover .crule{transform:none;transition:none}
+  .dot-rail{display:none}
+  .compare,.acts,.scn-grid,.agenda,.kpis,.flow-row,.split,.opt{grid-template-columns:1fr;gap:.85em}
+  .hero .v{font-size:2.6em}
+  .mx{display:flex;flex-direction:column;gap:.85em}
+  .mx .yaxis,.mx .xaxis{writing-mode:horizontal-tb;transform:none;text-align:left}
+  .fstep .arr{display:none}
+  .foot{position:static;left:auto;right:auto;bottom:auto;margin-top:22px;padding-top:14px;flex-wrap:wrap;gap:.5em 1em}
+  .foot .pg{font-size:12px}
+  .foot .tag{font-size:13px;display:flex;flex-direction:column;gap:2px}  /* 標語拆中英兩行 */
+  .foot .tag .en{margin-left:0}
+  .foot .logo{height:24px;margin-left:auto}
+  .cover .inner{padding:28px 20px 24px}
+  .cover .logo-top{position:static;height:30px;margin:0 0 30px;align-self:flex-start}
+  .cover .lines{display:none}
+  .cover .ct{font-size:2em}
+  .cover .crule{width:100%}
+  .cover .who{margin-top:1.4em;font-size:1.25em}
+  .cover .foot{justify-content:flex-start;margin-top:30px}
+  .divider .num{font-size:4em}
+  .divider .dt{font-size:1.8em}
+  .tblwrap{overflow-x:auto}
+  .closing .inner{padding:36px 22px}
+  .closing .logo-chip .logo{height:26px}
+  .closing .quote{font-size:1.5em}
+}
+@media screen and (max-aspect-ratio: 13/10) and (min-width:560px){
+  .acts,.agenda,.kpis,.flow-row{grid-template-columns:1fr 1fr}
+}
+
+/* ===== 列印：A4 橫式、一頁一張（檔頭「列印」鈕或 Ctrl／Cmd+P）=====
+   提醒：列印對話框請開啟「背景圖形 / Background graphics」才會印出底色與品牌色 */
+@media print{
+  @page{size:33.87cm 19.05cm;margin:0}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  html{scroll-snap-type:none}
+  body{background:#fff;background-image:none}
+  body::before{display:none}
+  .topbar,.dot-rail,.print-btn{display:none}
+  .slide{min-height:auto;padding:0;display:block;page-break-after:always;break-after:page}
+  .slide:last-child{page-break-after:auto;break-after:auto}
+  .frame{aspect-ratio:16/9;width:100%;transform:none;opacity:1;box-shadow:none;border:none;border-radius:0;container-type:size;page-break-inside:avoid;break-inside:avoid}
+  .inner,.inner.scroll{overflow:visible}
+  .reveal{opacity:1;transform:none}
+  .rule::before,.rule::after,.cover .crule{transform:none}
+  /* 收合內容、hover 白話：列印時全部攤開（收合由 JS 於 beforeprint 開啟） */
+  details .body{display:block}
+  .tip{border-bottom:none;color:inherit;font-weight:inherit}
+  .tip::after{content:"（" attr(data-tip) "）";position:static;opacity:1;transform:none;background:none;box-shadow:none;color:var(--ink-mute);font-size:.82em;display:inline;max-width:none;white-space:normal;padding:0}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar"><i id="bar"></i></div>
+<div class="dot-rail" id="rail"></div>
+<button class="print-btn" onclick="window.print()" title="列印／存 PDF（滿版 16:9，一頁一張）">⎙ 列印／PDF</button>
+
+<!-- ============ PATTERN: cover 封面｜標題＋報告人＋日期 ============ -->
+<section class="slide cover active" data-label="封面">
+  <div class="frame"><div class="inner">
+    <span class="logo-top" role="img" aria-label="永豐金控 SinoPac Holdings"></span>
+    <div class="lines"><i></i><i></i><i></i></div>
+    <div class="ct reveal">簡報標題</div>
+    <div class="crule"></div>
+    <div class="who reveal">○○部門　報告人</div>
+    <div class="date reveal">Year / Month / Day</div>
+    <div class="foot"><span class="tag"><span class="zh">翻轉金融 共創美好生活</span><span class="en">Together, a better life.</span></span></div>
+  </div></div>
+</section>
+
+<!-- ============ PATTERN: agenda 議程｜3–8 個段落的目錄 ============ -->
+<section class="slide" data-label="議程">
+  <div class="frame"><div class="inner">
+    <div class="head reveal"><span class="kicker"><span class="pip"></span>Agenda</span><h2 class="title">今日議程</h2><div class="rule"></div></div>
+    <div class="agenda reveal">
+      <div class="ag"><span class="no">01</span><div><div class="t">背景與目標</div><div class="s">為什麼做、要達成什麼</div></div></div>
+      <div class="ag"><span class="no">02</span><div><div class="t">現況對照</div><div class="s">導入前後的差異</div></div></div>
+      <div class="ag"><span class="no">03</span><div><div class="t">執行成果</div><div class="s">關鍵指標與案例</div></div></div>
+      <div class="ag"><span class="no">04</span><div><div class="t">進度與時程</div><div class="s">各階段里程碑</div></div></div>
+      <div class="ag"><span class="no">05</span><div><div class="t">風險與因應</div><div class="s">待解議題</div></div></div>
+      <div class="ag"><span class="no">06</span><div><div class="t">下一步</div><div class="s">資源需求與決議事項</div></div></div>
+    </div>
+  </div></div>
+</section>
+
+<!-- ============ PATTERN: divider 章節隔頁｜章節切換、節奏停頓 ============ -->
+<section class="slide divider" data-label="章節">
+  <div class="frame"><div class="inner">
+    <div class="num reveal">01</div>
+    <div class="dt reveal">背景與目標</div>
+    <div class="rule"></div>
+    <p class="dx reveal">一句話說明這個章節要回答的問題，讓聽眾知道接下來五分鐘的重點。</p>
+  </div></div>
+</section>
+
+<!-- ============ PATTERN: compare 雙欄對照｜任何 A vs B（藍＝現況、紅＝行動）============ -->
+<section class="slide" data-label="對照">
+  <div class="frame"><div class="inner">
+    <div class="head reveal"><span class="kicker"><span class="pip"></span>02 · 現況對照</span><h2 class="title">自動化上線：月結算由 3 天縮至 2 小時</h2><div class="rule"></div></div>
+    <div class="compare reveal">
+      <div class="cpanel a">
+        <div class="ph"><span class="t">BEFORE</span><span class="cl">現行做法</span></div>
+        <p class="nm">人工作業</p>
+        <ul class="clist">
+          <li><span class="ic">×</span><span>各單位回報格式不一，人工逐份彙整。</span></li>
+          <li><span class="ic">×</span><span>每月結算耗時三個工作天。</span></li>
+          <li><span class="ic">×</span><span>判讀標準因人而異，品質難一致。</span></li>
+        </ul>
+      </div>
+      <div class="cpanel b">
+        <div class="ph"><span class="t">AFTER</span><span class="cl">導入後</span></div>
+        <p class="nm">自動化流程</p>
+        <ul class="clist">
+          <li><span class="ic">✓</span><span><b>格式統一</b>——範本回填、自動彙整成總表。</span></li>
+          <li><span class="ic">✓</span><span><b>當日完成</b>——結算時間從 3 天縮到 2 小時。</span></li>
+          <li><span class="ic">✓</span><span><b>標準一致</b>——同一套規則套到每一份。</span></li>
+        </ul>
+      </div>
+    </div>
+  </div></div>
+</section>
+
+<!-- ============ PATTERN: cards 卡片陣列｜3–4 個並列重點（紅藍 stripe 分類型）============ -->
+<section class="slide" data-label="重點">
+  <div class="frame"><div class="inner">
+    <div class="head reveal"><span class="kicker"><span class="pip"></span>03 · 工作主軸</span><h2 class="title">四軸推進：規劃已收斂，建置為當前瓶頸</h2><div class="rule"></div></div>
+    <div class="acts reveal">
+      <div class="act blue"><div class="stripe"></div><div class="en">Plan</div><h3>規劃</h3><div class="hint">需求盤點 → 範圍界定</div><div class="detail">訪談各使用單位，盤點高頻痛點，界定第一階段導入範圍。</div><span class="hot">★ 已完成</span></div>
+      <div class="act"><div class="stripe"></div><div class="en">Build</div><h3>建置</h3><div class="hint">流程設計 → 系統開發</div><div class="detail">把人工流程改寫為自動化規則，完成開發與內部測試。</div><span class="hot">★ 進行中</span></div>
+      <div class="act"><div class="stripe"></div><div class="en">Pilot</div><h3>試辦</h3><div class="hint">小範圍上線 → 回饋修正</div><div class="detail">先在兩個單位試行一季，蒐集回饋、迭代規則。</div><span class="hot">★ 本季啟動</span></div>
+      <div class="act"><div class="stripe"></div><div class="en">Scale</div><h3>推廣</h3><div class="hint">全面導入 → 教育訓練</div><div class="detail">完成全單位導入與訓練，建立維運與支援機制。</div><span class="hot">★ 規劃中</span></div>
+    </div>
+  </div></div>
+</section>
+
+<!-- ============ PATTERN: kpi 數字頁｜3–4 個關鍵指標（data-count 進場滾動，data-dec 控制小數位）============ -->
+<section class="slide" data-label="成果指標">
+  <div class="frame"><div class="inner">
+    <div class="head reveal"><span class="kicker"><span class="pip"></span>04 · 執行成果</span><h2 class="title">首季成效：結算工時 −67%，錯誤率降至 0.3%</h2><div class="rule"></div></div>
+    <div class="kpis reveal">
+      <div class="kpi"><div class="v"><span data-count="87">0</span><span class="u">%</span></div><div class="l">流程完成率</div><div class="d">目標 80%，提前達標</div><span class="tr up">▲ 較上季 +12%</span></div>
+      <div class="kpi blue"><div class="v"><span data-count="1240">0</span><span class="u">件</span></div><div class="l">累計處理件數</div><div class="d">含例行報表與專案文件</div><span class="tr up">▲ 月均 +310 件</span></div>
+      <div class="kpi"><div class="v">-<span data-count="35">0</span><span class="u">%</span></div><div class="l">平均處理工時</div><div class="d">自動化彙整取代人工複製貼上</div><span class="tr up">▲ 持續下降</span></div>
+      <div class="kpi blue"><div class="v"><span data-count="12">0</span><span class="u">個</span></div><div class="l">參與單位</div><div class="d">涵蓋前中後台</div><span class="tr up">▲ 本季新增 4 個</span></div>
+    </div>
+  </div></div>
+</section>
+
+<!-- ============ PATTERN: table 表格頁｜清單、進度表（≤7 列；藍表頭＋狀態 chip）============ -->
+<section class="slide" data-label="進度表">
+  <div class="frame"><div class="inner">
+    <div class="head reveal"><span class="kicker"><span class="pip"></span>05 · 進度</span><h2 class="title">進度總覽：六項工作五項如期，介接落後兩週</h2><div class="rule"></div></div>
+    <div class="tblwrap reveal">
+      <table>
+        <thead><tr><th>項目</th><th>負責單位</th><th>期程</th><th>狀態</th><th>備註</th></tr></thead>
+        <tbody>
+          <tr><td class="em">需求盤點</td><td>數位科技處</td><td>Q1</td><td><span class="st ok">已完成</span></td><td>訪談 12 個單位</td></tr>
+          <tr><td class="em">系統建置</td><td>資訊處</td><td>Q1–Q2</td><td><span class="st run">進行中</span></td><td>核心模組完成 80%</td></tr>
+          <tr><td class="em">資安審查</td><td>資安處</td><td>Q2</td><td><span class="st run">進行中</span></td><td>第二輪審查中</td></tr>
+          <tr><td class="em">單位試辦</td><td>兩個試辦單位</td><td>Q3</td><td><span class="st warn">待啟動</span></td><td>待資安審查通過</td></tr>
+          <tr><td class="em">全面推廣</td><td>各單位</td><td>Q4</td><td><span class="st warn">規劃中</span></td><td>含教育訓練</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div></div>
+</section>
+
+<!-- ============ PATTERN: matrix 2×2 定位矩陣｜優先序、市場定位（顧問常用）============ -->
+<section class="slide" data-label="定位矩陣">
+  <div class="frame"><div class="inner">
+    <div class="head reveal"><span class="kicker"><span class="pip"></span>05 · 策略定位</span><h2 class="title">投入優先序：影響力 × 可行性</h2><div class="rule"></div></div>
+    <div class="mx reveal">
+      <div class="yaxis">影響力　高 → 低</div>
+      <div class="q cool"><div class="qt">策略佈局</div><div class="qx">影響大但難度高，需跨單位資源，列入年度規劃。</div></div>
+      <div class="q hot"><div class="qt">優先投入</div><div class="qx">影響大、可行性高——<span class="k">本季啟動</span>。</div></div>
+      <div class="q plain"><div class="qt">暫緩</div><div class="qx">影響小又難做，先<span class="mute">擱置觀察</span>。</div></div>
+      <div class="q soft"><div class="qt">快速見效</div><div class="qx">好做但影響有限，當作練兵與展示成果。</div></div>
+      <div class="xaxis">可行性　低 → 高</div>
+    </div>
+  </div></div>
+</section>
+
+<!-- ============ PATTERN: case 案例頁｜背景/痛點 → 做法 → 產出（指令框選用）============ -->
+<section class="slide" data-label="案例">
+  <div class="frame"><div class="inner">
+    <div class="head reveal"><span class="kicker"><span class="pip"></span>06 · 案例</span><h2 class="title">案例驗證：月報彙整由 2 人日降至 20 分鐘</h2><div class="rule"></div></div>
+    <div class="scn-grid reveal">
+      <div class="scn-col">
+        <div class="minlbl">背景／痛點</div>
+        <div class="ba-old">各單位月報格式不一、散落各處，人工逐份打開、複製貼上彙整，每月耗掉承辦兩到三天。</div>
+        <div class="minlbl">做法</div>
+        <div class="ba-new">統一回填範本後，由自動化流程一次掃描所有回填檔，彙整成總表、計算完成率、標出未繳交單位與異常項目。</div>
+      </div>
+      <div class="scn-col">
+        <div class="minlbl">操作示意（選用；不需要展示指令時整塊刪除）</div>
+        <div class="cmd"><button class="copy-btn">複製</button><div class="cmd-top"><span class="d"></span><span class="d"></span><span class="d"></span><span class="label">指令</span></div><code><span class="q">掃描</span> <span class="f">「各單位月報」</span> <span class="q">資料夾，把回填結果彙整成一張總表，算各單位完成率、標出未繳交與異常項目，產出彙整報表。</span></code></div>
+        <div class="out"><span class="ar">產出 ▸</span> 月報彙整總表（完成率＋異常標示）</div>
+        <div class="why"><b>效益：</b>彙整時間從 2–3 天縮到 2 小時，標準一致、可追溯。</div>
+      </div>
+    </div>
+  </div></div>
+</section>
+
+<!-- ============ PATTERN: timeline 流程/時程｜階段性流程、里程碑（now 標示當前階段）============ -->
+<section class="slide" data-label="時程">
+  <div class="frame"><div class="inner">
+    <div class="head reveal"><span class="kicker"><span class="pip"></span>07 · 時程</span><h2 class="title">四階段時程：Q3 試辦是全案成敗節點</h2><div class="rule"></div></div>
+    <div class="flow-row reveal">
+      <div class="fstep"><span class="ftag">Q1</span><span class="ft">規劃</span><span class="fx">需求盤點、範圍界定、資源評估。</span><span class="arr">→</span></div>
+      <div class="fstep now"><span class="ftag">Q2 · 現在</span><span class="ft">建置</span><span class="fx">系統開發、資安審查、內部測試。</span><span class="arr">→</span></div>
+      <div class="fstep"><span class="ftag">Q3</span><span class="ft">試辦</span><span class="fx">兩個單位試行一季，蒐集回饋迭代。</span><span class="arr">→</span></div>
+      <div class="fstep"><span class="ftag">Q4</span><span class="ft">推廣</span><span class="fx">全單位導入、教育訓練、維運機制。</span></div>
+    </div>
+  </div></div>
+</section>
+
+<!-- ============ PATTERN: optiontabs 方案切換｜互動式方案/情境比較（金融・顧問風，取代終端機示意）============ -->
+<section class="slide" data-label="方案評估">
+  <div class="frame"><div class="inner">
+    <div class="head reveal"><span class="kicker"><span class="pip"></span>07 · 方案評估</span><h2 class="title">方案抉擇：B 案總成本最低，A 案半年回收</h2><div class="rule"></div></div>
+    <div class="tabs reveal" id="optTabs">
+      <button class="on" data-opt="0"><span class="tn">A</span>自建</button>
+      <button data-opt="1"><span class="tn">B</span>採購</button>
+      <button data-opt="2"><span class="tn">C</span>併購</button>
+    </div>
+    <div class="tabpane on reveal" data-pane="0">
+      <div class="opt">
+        <div class="omain">
+          <div class="ot">自建團隊</div><div class="od">In-house build</div>
+          <p class="ob">由內部團隊自行開發核心系統，<span class="k">掌握度最高</span>，並把長期 <span class="tip" tabindex="0" data-tip="Total Cost of Ownership，總持有成本：把建置、維運、人力全部算進去的長期成本。">TCO</span> 壓到最低；代價是<span class="mark">上線最慢</span>，需要時間累積人才。適合當作長期核心能力來養。</p>
+        </div>
+        <div class="ometa">
+          <div class="mbox pro"><div class="mh">優勢</div><ul><li>技術與資料完全自主</li><li>長期成本最低</li></ul></div>
+          <div class="mbox con"><div class="mh">取捨</div><ul><li>上線最慢、前期投入大</li></ul></div>
+          <details><summary><span class="dot"></span>投入假設<span class="chev">▸</span></summary><div class="body">第一年招募 3–4 名核心工程師，第二年具備自主迭代能力。</div></details>
+        </div>
+      </div>
+    </div>
+    <div class="tabpane reveal" data-pane="1">
+      <div class="opt">
+        <div class="omain">
+          <div class="ot">採購現成平台</div><div class="od">Buy / License</div>
+          <p class="ob">向成熟供應商採購，<span class="k">最快上線</span>、風險可控；代價是<span class="mark">長期受制於人</span>，核心能力留在外部。適合先卡位、驗證市場。</p>
+        </div>
+        <div class="ometa">
+          <div class="mbox pro"><div class="mh">優勢</div><ul><li>數週即可導入</li><li>供應商扛維運</li></ul></div>
+          <div class="mbox con"><div class="mh">取捨</div><ul><li>授權費逐年付</li><li>客製彈性受限</li></ul></div>
+        </div>
+      </div>
+    </div>
+    <div class="tabpane reveal" data-pane="2">
+      <div class="opt">
+        <div class="omain">
+          <div class="ot">策略併購</div><div class="od">Acquire</div>
+          <p class="ob">直接買下擁有團隊與客戶的公司，<span class="k">一次補齊能力與市場</span>；但<span class="mark">整合風險最高</span>，文化與系統磨合是關鍵。</p>
+        </div>
+        <div class="ometa">
+          <div class="mbox pro"><div class="mh">優勢</div><ul><li>同時取得人才與客群</li><li>縮短學習曲線</li></ul></div>
+          <div class="mbox con"><div class="mh">取捨</div><ul><li>單筆金額最大</li><li>整合不確定性高</li></ul></div>
+        </div>
+      </div>
+    </div>
+  </div></div>
+</section>
+
+<!-- ============ PATTERN: quote 觀點頁｜大引述、節奏停頓（顧問/編輯風）============ -->
+<section class="slide quote-slide" data-label="核心觀點">
+  <div class="frame"><div class="inner">
+    <div class="head reveal"><span class="kicker"><span class="pip"></span>核心觀點</span></div>
+    <div class="bigq reveal">真正的護城河不是先做，<br>而是把<span class="k">客戶的關鍵資產</span>，<br>長期留在自己的系統裡。</div>
+    <div class="qby reveal">— 本案的核心判斷</div>
+  </div></div>
+</section>
+
+<!-- ============ PATTERN: prose 文字密集｜大段說明/政策解讀，結論先行＋雙欄結構化內文（v3 新增）============ -->
+<section class="slide" data-label="詳述">
+  <div class="frame"><div class="inner">
+    <div class="head reveal"><span class="kicker"><span class="pip"></span>08 · 政策說明</span><h2 class="title">三項法規調整：第二項對客戶衝擊最大</h2><div class="rule"></div></div>
+    <div class="bluf reveal">結論先行：建議分兩階段上線——低風險的門檻與費率先行，時效調整待系統介接完成再上，介接落後兩週為最大變數。</div>
+    <div class="prose reveal">
+      <p><b>調整一・門檻</b>——臨櫃結匯門檻 50 萬降至 30 萬，估月增 1,200 筆、臨櫃負載 +8%。</p>
+      <p><b>調整二・時效</b>——線上申請 T+2 縮至 T+0，須先完成三系統介接，為當前瓶頸。</p>
+      <p><b>調整三・費率</b>——小額匯款費率降 15%，年減手續費約 900 萬，須 +12% 件數打平。</p>
+      <p><b>法遵考量</b>——三項皆涉洗防與大額通報流程，須法遵單位會簽後才排程。</p>
+      <p><b>時程建議</b>——第一階段先上調整一、三；調整二待介接完成第二階段再上。</p>
+      <p><b>風險控管</b>——系統介接落後兩週即啟動人工備援，並每週追蹤進度。</p>
+    </div>
+  </div></div>
+</section>
+
+<!-- ============ PATTERN: blank 空白畫布｜品牌外框＋自由內容，守色票/字級下限、過不跑版檢查（v3 新增）============ -->
+<section class="slide" data-label="空白">
+  <div class="frame"><div class="inner">
+    <div class="head reveal"><span class="kicker"><span class="pip"></span>09 · 自訂</span><h2 class="title">空白版：標題可留可刪，版面自由發揮</h2><div class="rule"></div></div>
+    <div class="canvas reveal">
+      <!-- 自由填入任何內容。維持：品牌外框、官方色 var(--brand)/var(--blue)、字級下限 .78em、16:9 不跑版。
+           內容太長就給上層 inner 加 class="scroll"，或精簡；專屬樣式寫進文末 style#deck-custom。 -->
+      <p style="color:var(--ink-mute);font-size:.9em">（空白示意：把這塊 .canvas 換成你要的版面——大圖、自訂圖表、特殊排版皆可。）</p>
+    </div>
+  </div></div>
+</section>
+
+<!-- ============ PATTERN: closing 深色封底｜收束金句＋白底座 logo ============ -->
+<section class="slide closing" data-label="結語">
+  <div class="frame"><div class="inner">
+    <span class="logo-chip reveal"><span class="logo"></span></span>
+    <div class="cline reveal"><i></i><u></u></div>
+    <p class="quote reveal">一句話收束整份報告的核心主張，<br><span class="hl">把最想被記住的事</span>放在這裡。</p>
+    <p class="sub reveal">補充一行：下一步、徵求決議、或聯絡窗口。</p>
+    <div class="foot"><span class="tag"><span class="zh">翻轉金融 共創美好生活</span><span class="en">Together, a better life.</span></span></div>
+  </div></div>
+</section>
+
+<script>
+/* ===== 引擎：導覽、頁碼（純數字）、進度條、鍵盤 ===== */
+/* ===== 頁尾注入：logo/標語/頁碼單一來源，slide 內不再手寫 foot ===== */
+document.querySelectorAll('.slide:not(.cover) .inner').forEach(el=>{
+  if(el.querySelector('.foot'))return;
+  const f=document.createElement('div');f.className='foot';
+  f.innerHTML='<span class="pg"></span><span class="tag"><span class="zh">翻轉金融 共創美好生活</span><span class="en">Together, a better life.</span></span><span class="logo" role="img" aria-label="永豐金控 SinoPac Holdings"></span>';
+  el.appendChild(f);
+});
+const slides=[...document.querySelectorAll('.slide')];const total=slides.length;
+const rail=document.getElementById('rail');
+slides.forEach((s,i)=>{const b=document.createElement('button');b.innerHTML='<span class="lab">'+(s.dataset.label||'')+'</span>';b.addEventListener('click',()=>slides[i].scrollIntoView({behavior:'smooth'}));if(i===0)b.classList.add('on');rail.appendChild(b);});
+const dots=[...rail.children];
+slides.forEach((s,i)=>{const p=s.querySelector('.pg');if(p)p.textContent=String(i+1).padStart(2,'0');});
+const bar=document.getElementById('bar');let current=0;
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){const i=slides.indexOf(e.target);slides.forEach(s=>s.classList.remove('active'));e.target.classList.add('active');dots.forEach((d,di)=>d.classList.toggle('on',di===i));current=i;bar.style.width=(i/(total-1)*100)+'%';counters(e.target);}});},{threshold:.55});
+slides.forEach(s=>io.observe(s));
+function go(d){const n=Math.min(total-1,Math.max(0,current+d));slides[n].scrollIntoView({behavior:'smooth'});}
+window.addEventListener('keydown',e=>{if(['ArrowDown','PageDown'].includes(e.key)||(e.key===' '&&!e.shiftKey)){e.preventDefault();go(1);}else if(['ArrowUp','PageUp'].includes(e.key)||(e.key===' '&&e.shiftKey)){e.preventDefault();go(-1);}else if(e.key==='Home'){e.preventDefault();slides[0].scrollIntoView({behavior:'smooth'});}else if(e.key==='End'){e.preventDefault();slides[total-1].scrollIntoView({behavior:'smooth'});}});
+
+/* ===== KPI 數字滾動（data-count；data-dec 小數位）===== */
+function counters(sl){sl.querySelectorAll('[data-count]').forEach(el=>{if(el.dataset.done)return;el.dataset.done='1';const t=parseFloat(el.dataset.count),dec=+(el.dataset.dec||0),t0=performance.now(),dur=1200;(function f(now){const p=Math.min(1,(now-t0)/dur),e=1-Math.pow(1-p,3),v=t*e;el.textContent=dec?v.toFixed(dec):Math.round(v).toLocaleString('en-US');if(p<1)requestAnimationFrame(f);})(t0);});}
+
+/* ===== 一鍵複製 ===== */
+document.querySelectorAll('.copy-btn').forEach(b=>{b.addEventListener('click',e=>{e.stopPropagation();const code=b.parentElement.querySelector('code').innerText;navigator.clipboard.writeText(code).then(()=>{b.textContent='已複製 ✓';b.classList.add('done');setTimeout(()=>{b.textContent='複製';b.classList.remove('done');},1800);}).catch(()=>{b.textContent='請手動選取';});});});
+
+/* ===== 方案切換 tabs（optiontabs，金融/顧問風互動）===== */
+(function(){const tb=document.getElementById('optTabs');if(!tb)return;const btns=[...tb.querySelectorAll('button')],panes=[...document.querySelectorAll('.tabpane')];tb.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const i=+b.dataset.opt;btns.forEach(x=>x.classList.toggle('on',x===b));panes.forEach(p=>p.classList.toggle('on',+p.dataset.pane===i));});})();
+/* ===== 列印輔助：填數字、攤開收合（A4 橫式一頁一張）===== */
+function fillCounters(){document.querySelectorAll('[data-count]').forEach(el=>{const t=parseFloat(el.dataset.count),dec=+(el.dataset.dec||0);el.dataset.done='1';el.textContent=dec?t.toFixed(dec):Math.round(t).toLocaleString('en-US');});}
+let _accState=[];
+window.addEventListener('beforeprint',()=>{fillCounters();_accState=[...document.querySelectorAll('details')].map(d=>{const o=d.open;d.open=true;return o;});});
+window.addEventListener('afterprint',()=>{const ds=[...document.querySelectorAll('details')];ds.forEach((d,i)=>{d.open=_accState[i];});});
+/* ===== dev 溢出檢查：僅 ?debug 或 <html data-checkoverflow> 啟用，平時完全不顯示 ===== */
+if(location.search.indexOf('debug')>-1||document.documentElement.hasAttribute('data-checkoverflow')){
+  requestAnimationFrame(()=>{slides.forEach(s=>{const el=s.querySelector('.inner');if(!el)return;const over=el.scrollHeight-el.clientHeight;if(over>2){el.style.outline='3px solid #ff2d2d';el.style.outlineOffset='-3px';console.warn('[overflow]',(s.dataset.label||'?'),'超出',over+'px');}});});
+}
+</script>
+<style id="deck-custom">/* 本副簡報專屬樣式寫在這裡；禁止改動上方引擎 */</style>
+</body>
+</html>
